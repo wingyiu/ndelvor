@@ -1,8 +1,8 @@
-#include "delaunay.h"
+#include <cstdio>
+
+#include "Delaunay.h"
 #include "util.h"
 
-#include <cstdio>
-//#define DEBUG
 
 Delaunay::Delaunay(unsigned dimension):m_dimension(dimension)
 {

@@ -1,9 +1,10 @@
 #ifndef DATAPARSER_H
 #define DATAPARSER_H
 
-#include "point.h"
 #include <cstdio>
 using std::FILE;
+
+#include "Point.h"
 
 class DataParser
 {

@@ -1,14 +1,15 @@
 /*
- * dataProducer.cpp
+ * DataProducer.cpp
  *
  *  Created on: 2011-10-18
  *      Author: wingyiu
  */
 
-#include "dataProducer.h"
 #include <cstdlib>
 #include <ctime>
 using namespace std;
+
+#include "DataProducer.h"
 
 DataProducer::DataProducer(unsigned d):m_dimension(d) {
 	// TODO Auto-generated constructor stub

@@ -1,11 +1,12 @@
-#include "point.h"
-#include "face.h"
-#include "simplex.h"
-#include "util.h"
-
 #include <memory>
 #include <cassert>
 #include <cstdio>
+
+#include "Point.h"
+#include "Face.h"
+#include "Simplex.h"
+#include "util.h"
+
 
 Simplex::Simplex():m_dimension(0), m_faces((Face*)NULL)
 {

@@ -1,11 +1,11 @@
 #ifndef SIMPLEX_H
 #define SIMPLEX_H
 
-#include "point.h"
-#include "face.h"
 #include <memory>
-//using std::std::shared_ptr;
 using namespace std;
+
+#include "Point.h"
+#include "Face.h"
 
 class Simplex
 {

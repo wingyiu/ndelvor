@@ -8,7 +8,7 @@
 #ifndef DATAPRODUCER_H_
 #define DATAPRODUCER_H_
 
-#include "point.h"
+#include "Point.h"
 
 class DataProducer {
 public:

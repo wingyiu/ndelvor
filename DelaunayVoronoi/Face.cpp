@@ -1,7 +1,8 @@
-#include "face.h"
 #include <set>
 #include <cstdio>
 using namespace std;
+
+#include "Face.h"
 
 Face::Face():m_pointNum(0), m_points((Point*)NULL)
 {

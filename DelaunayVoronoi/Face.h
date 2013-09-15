@@ -1,9 +1,10 @@
 #ifndef FACE_H
 #define FACE_H
 
-#include "point.h"
 #include <memory>
 using namespace std;
+
+#include "Point.h"
 
 class Face
 {

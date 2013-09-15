@@ -1,15 +1,13 @@
 #ifndef DELAUNAY_H
 #define DELAUNAY_H
 
-
-#include "point.h"
-#include "simplex.h"
 #include <list>
 #include <utility>
 #include <set>
-//using std::vector;
-//using std::list;
 using namespace std;
+
+#include "Point.h"
+#include "Simplex.h"
 
 class Delaunay
 {

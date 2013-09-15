@@ -2,14 +2,13 @@
 #include <cstdio>
 using namespace std;
 
-#include "dataParser.h"
-#include "point.h"
-#include "simplex.h"
-#include "delaunay.h"
+#include "DataParser.h"
+#include "Point.h"
+#include "Simplex.h"
+#include "Delaunay.h"
 #include "util.h"
-#include "dataProducer.h"
+#include "DataProducer.h"
 
-#define DEBUG
 
 int main()
 {
@@ -21,12 +20,16 @@ int main()
     printf("longlong:%d\n\r", sizeof(long long));
 
     int dimension;
+    
+    // read the points from file
     //DataParser dp("data.txt");
     //dimension = dp.getDimension();
     //printf("@dimension:%d\n\r", dimension);
 
-    DataProducer dp(2);
+    
     dimension = 2;
+    DataProducer dp(dimension);
+
 
     Delaunay del(dimension);
     del.initialization();
@@ -35,7 +38,7 @@ int main()
 #endif
 
     //while(dp.hasNext())
-    for(int i=0; i<10; i++)
+    for(int i=0; i<100; i++)
     {
     	Point p = dp.getNext();
         //Point p = dp.getNext();
@@ -44,12 +47,16 @@ int main()
         del.toString();
 #endif
     }
-
+    
+    //output the circumsphere and radii of the simplexs order by radii
+    
+    printf("Simplexs:\n");
     list<Simplex> tessell = del.getSortedCircumsphere();
     list<Simplex>::iterator it;
     for(it = tessell.begin(); it != tessell.end(); it++)
     {
-        (*it).getCircumcenter().toString();printf(" %f\n\r", (*it).getSquaredRadii());
+        (*it).getCircumcenter().toString();
+        printf(" %f\n\r", (*it).getSquaredRadii());
     }
 
     return 0;

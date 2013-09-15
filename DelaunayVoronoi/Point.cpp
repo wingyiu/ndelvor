@@ -1,9 +1,8 @@
-#include "point.h"
-#include "define.h"
-
-//#include <cstddef>
 #include <cstdio>
 using std::printf;
+
+#include "Point.h"
+#include "define.h"
 
 
 Point::Point():m_dimension(0)
