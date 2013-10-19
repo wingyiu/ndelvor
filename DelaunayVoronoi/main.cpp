@@ -12,12 +12,12 @@ using namespace std;
 
 int main()
 {
-    printf("short:%d\n\r", sizeof(short));
-    printf("int:%d\n\r", sizeof(int));
-    printf("long:%d\n\r", sizeof(long));
-    printf("float:%d\n\r", sizeof(float));
-    printf("double:%d\n\r", sizeof(double));
-    printf("longlong:%d\n\r", sizeof(long long));
+    printf("short:%d\n", sizeof(short));
+    printf("int:%d\n", sizeof(int));
+    printf("long:%d\n", sizeof(long));
+    printf("float:%d\n", sizeof(float));
+    printf("double:%d\n", sizeof(double));
+    printf("longlong:%d\n", sizeof(long long));
 
     int dimension;
     
@@ -56,7 +56,7 @@ int main()
     for(it = tessell.begin(); it != tessell.end(); it++)
     {
         (*it).getCircumcenter().toString();
-        printf(" %f\n\r", (*it).getSquaredRadii());
+        printf(" %f\n", (*it).getSquaredRadii());
     }
 
     return 0;

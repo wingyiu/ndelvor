@@ -21,7 +21,6 @@ protected:
 private:
     unsigned m_pointNum;
     std::shared_ptr<Point> m_points;
-//    double *m_points;
 };
 
 class PointArrayDeleter

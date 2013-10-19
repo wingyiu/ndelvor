@@ -19,7 +19,7 @@ void Delaunay::addPoint(Point point)
     // find n-simplices whose circumsphere contain the new point
     // flag these n-simplices to indicate deletion.
 #ifdef DEBUG
-	printf("Point adding:"); point.toString();printf("\n\r");
+	printf("Point adding:"); point.toString();printf("\n");
 #endif
 	//check whether the adding-point  unique
 	if(isUnique(point))
@@ -46,7 +46,7 @@ void Delaunay::initialization()
     for(unsigned int i=1; i<= m_dimension; i++)
     {
         coords = new double[m_dimension];
-        //printf("%d\n\r", coords);
+        //printf("%d\n", coords);
         for(unsigned int j=0; j<m_dimension; j++)
         {
             if(i == j+1)
@@ -58,16 +58,16 @@ void Delaunay::initialization()
     }
 
     Face *faces = new Face[m_dimension+1];
-    for(unsigned int i=0; i<= m_dimension; i++)
+    for(unsigned int i=0; i<=m_dimension; i++)
     {
-        Point *pnt = new Point[m_dimension];
-        for(unsigned int j=0, k=0; j<= m_dimension; j++)
+        Point *pnts = new Point[m_dimension];
+        for(unsigned int j=0, k=0; j<=m_dimension; j++)
         {
             if(i != j)
-                pnt[k++] = points[j];
+                pnts[k++] = points[j];
         }
 
-        Face ft = Face(m_dimension, pnt);
+        Face ft = Face(m_dimension, pnts);
 
         faces[i] = ft;
     }
@@ -131,7 +131,9 @@ void Delaunay::findContainSimplices(Point point)
 bool Delaunay::isIntersected(Simplex simplex, Point point)
 {
     Point cc = simplex.getCircumcenter();
-    cc.toString();printf(" %f", simplex.getSquaredRadii());printf("\n\r");
+    cc.toString();
+    printf(" %f", simplex.getSquaredRadii());
+    printf("\n");
     double squaredDistance;
     squaredDistance = sq_distance(cc.getCoordinate(), point.getCoordinate(), m_dimension);
     // TODO change code blow
@@ -205,7 +207,7 @@ void Delaunay::toString()
         //Face *f = s.
         //for()
     }
-    printf("\n\r");
+    printf("\n");
 }
 
 bool Delaunay::isUnique(Point point)

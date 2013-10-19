@@ -17,7 +17,7 @@ public:
     void initialization();
     void addPoint(Point point);
     Delaunay& addSimplex(Simplex simplex);
-    const list<Simplex> & getSortedCircumsphere();
+    const list<Simplex>& getSortedCircumsphere();
     void toString();
 protected:
 private:

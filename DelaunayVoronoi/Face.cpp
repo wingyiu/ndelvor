@@ -35,14 +35,6 @@ const Point* Face::getPoints() const
 
 void Face::toString()
 {
-//    printf("    Face[pointNum:%d, points:[\n\r", m_pointNum);
-//    Point *p = m_points.get();
-//    for(unsigned i=0; i<m_pointNum; i++)
-//    {
-//        (p+i)->toString();
-//        printf(", ");
-//    }
-//    printf("]]\n\r");
 	Point *p = m_points.get();
 	unsigned i;
 	for(i=0; i<m_pointNum; i++)
@@ -50,7 +42,7 @@ void Face::toString()
 		printf(" ");
 		(p+i)->toString();
 	}
-	printf("\n\r");
+	printf("\n");
 }
 
 
@@ -76,5 +68,5 @@ void PointArrayDeleter::operator()(Point *p)
 {
     delete [] p;
     p = NULL;
-    //printf("Point[] deleted.\n\r");
+    //printf("Point[] deleted.\n");
 }

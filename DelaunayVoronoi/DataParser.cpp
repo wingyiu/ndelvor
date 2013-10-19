@@ -22,7 +22,7 @@ Point DataParser::getNext()
     for(int i=0; i<m_dimension; i++)
     {
         fscanf(m_file, "%lf", coord+i);
-        fscanf(m_file, "%*[ ,\n\r]");
+        fscanf(m_file, "%*[ ,\n]");
     }
     Point p(m_dimension, coord);
     return p;

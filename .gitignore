@@ -1,0 +1,14 @@
+.DS_Store
+*.o
+*.xcuserstate
+
+DelaunayVoronoi/delvor
+
+DelaunayVoronoi/makefile
+
+DelaunayVoronoi/rand_d2_n100.txt
+
+*.xcscheme
+
+
+*.plist

@@ -16,6 +16,7 @@ Simplex::Simplex(unsigned dimension):m_dimension(dimension), m_faces((Face*)NULL
 {
     //ctor
 }
+
 Simplex::Simplex(unsigned dimension, Face* faces):m_dimension(dimension), m_faces(faces, FaceArrayDeleter())
 {
     mergePoints();
