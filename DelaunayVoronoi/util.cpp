@@ -1,7 +1,50 @@
 #include <cstdio>
 using namespace std;
 
-double det(double *s, int n)
+#define fabs(x) ((x)>0?(x):-(x))
+#define zero(x) (fabs(x)<1e-10)
+
+double det(double* a, int n){
+	int i, j, k, sign=0;
+	double ret=1, t;
+    double *b = new double[n*n];
+	//if (a.n!=a.m)
+	//	return 0;
+	for (i=0; i<n; i++)
+		for (j=0; j<n; j++)
+			b[i*n+j] = a[i*n+j];
+    
+	for (i=0; i<n; i++){
+		if (zero(b[i*n+i])){
+			for (j=i+1; j<n; j++)
+				if (!zero(b[j*n+i]))
+					break;
+			
+            if (j == n)
+				return 0;
+			
+            for (k=i; k<n; k++)
+				t = b[i*n+k], b[i*n+k]=b[j*n+k], b[j*n+k] = t;
+			sign++;
+		}
+        
+		ret *= b[i*n+i];
+		for (k=i+1; k<n; k++)
+			b[i*n+k] /= b[i*n+i];
+		for (j=i+1; j<n; j++)
+			for (k=i+1; k<n; k++)
+				b[j*n+k] -= b[j*n+i]*b[i*n+k];
+	}
+    
+    delete[] b;
+    
+	if (sign&1)
+		ret = -ret;
+	return ret;
+}
+
+
+double det_xxx(double *s, int n)
 {
     int z, j, k;
     double r, total = 0;
