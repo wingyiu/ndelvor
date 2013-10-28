@@ -6,103 +6,176 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		CE4D7ABA1672553B00A7EE69 /* DelaunayVoronoi.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE4D7AB91672553B00A7EE69 /* DelaunayVoronoi.1 */; };
+		CE4D7AD2167255AA00A7EE69 /* DataParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE4D7AC1167255AA00A7EE69 /* DataParser.cpp */; };
+		CE4D7AD3167255AA00A7EE69 /* DataProducer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE4D7AC3167255AA00A7EE69 /* DataProducer.cpp */; };
+		CE4D7AD4167255AA00A7EE69 /* Delaunay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE4D7AC6167255AA00A7EE69 /* Delaunay.cpp */; };
+		CE4D7AD5167255AA00A7EE69 /* Face.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE4D7AC8167255AA00A7EE69 /* Face.cpp */; };
+		CE4D7AD6167255AA00A7EE69 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE4D7ACB167255AA00A7EE69 /* main.cpp */; };
+		CE4D7AD7167255AA00A7EE69 /* Point.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE4D7ACC167255AA00A7EE69 /* Point.cpp */; };
+		CE4D7AD8167255AA00A7EE69 /* Simplex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE4D7ACE167255AA00A7EE69 /* Simplex.cpp */; };
+		CE4D7AD9167255AA00A7EE69 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE4D7AD0167255AA00A7EE69 /* util.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CE4D7AB11672553B00A7EE69 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				CE4D7ABA1672553B00A7EE69 /* DelaunayVoronoi.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		B4F0433217E5C2D5006276B4 /* DataParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DataParser.cpp; sourceTree = "<group>"; };
-		B4F0433317E5C2D5006276B4 /* DataParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataParser.h; sourceTree = "<group>"; };
-		B4F0433417E5C2D5006276B4 /* DataProducer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DataProducer.cpp; sourceTree = "<group>"; };
-		B4F0433517E5C2D5006276B4 /* DataProducer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataProducer.h; sourceTree = "<group>"; };
-		B4F0433617E5C2D5006276B4 /* define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = define.h; sourceTree = "<group>"; };
-		B4F0433717E5C2D5006276B4 /* Delaunay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Delaunay.cpp; sourceTree = "<group>"; };
-		B4F0433817E5C2D5006276B4 /* Delaunay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Delaunay.h; sourceTree = "<group>"; };
-		B4F0433917E5C2D5006276B4 /* Face.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Face.cpp; sourceTree = "<group>"; };
-		B4F0433A17E5C2D5006276B4 /* Face.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Face.h; sourceTree = "<group>"; };
-		B4F0433B17E5C2D5006276B4 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		B4F0433C17E5C2D5006276B4 /* Point.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Point.cpp; sourceTree = "<group>"; };
-		B4F0433D17E5C2D5006276B4 /* Point.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Point.h; sourceTree = "<group>"; };
-		B4F0433E17E5C2D5006276B4 /* Simplex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Simplex.cpp; sourceTree = "<group>"; };
-		B4F0433F17E5C2D5006276B4 /* Simplex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Simplex.h; sourceTree = "<group>"; };
-		B4F0434017E5C2D5006276B4 /* util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = util.cpp; sourceTree = "<group>"; };
-		B4F0434117E5C2D5006276B4 /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
-		B4F0434217E5C301006276B4 /* makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = makefile; sourceTree = "<group>"; usesTabs = 1; };
+		CE4D7AB31672553B00A7EE69 /* DelaunayVoronoi */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DelaunayVoronoi; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE4D7AB91672553B00A7EE69 /* DelaunayVoronoi.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = DelaunayVoronoi.1; sourceTree = "<group>"; };
+		CE4D7AC1167255AA00A7EE69 /* DataParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DataParser.cpp; sourceTree = "<group>"; };
+		CE4D7AC2167255AA00A7EE69 /* DataParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataParser.h; sourceTree = "<group>"; };
+		CE4D7AC3167255AA00A7EE69 /* DataProducer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DataProducer.cpp; sourceTree = "<group>"; };
+		CE4D7AC4167255AA00A7EE69 /* DataProducer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataProducer.h; sourceTree = "<group>"; };
+		CE4D7AC5167255AA00A7EE69 /* define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = define.h; sourceTree = "<group>"; };
+		CE4D7AC6167255AA00A7EE69 /* Delaunay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Delaunay.cpp; sourceTree = "<group>"; };
+		CE4D7AC7167255AA00A7EE69 /* Delaunay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Delaunay.h; sourceTree = "<group>"; };
+		CE4D7AC8167255AA00A7EE69 /* Face.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Face.cpp; sourceTree = "<group>"; };
+		CE4D7AC9167255AA00A7EE69 /* Face.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Face.h; sourceTree = "<group>"; };
+		CE4D7ACB167255AA00A7EE69 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		CE4D7ACC167255AA00A7EE69 /* Point.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Point.cpp; sourceTree = "<group>"; };
+		CE4D7ACD167255AA00A7EE69 /* Point.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Point.h; sourceTree = "<group>"; };
+		CE4D7ACE167255AA00A7EE69 /* Simplex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Simplex.cpp; sourceTree = "<group>"; };
+		CE4D7ACF167255AA00A7EE69 /* Simplex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Simplex.h; sourceTree = "<group>"; };
+		CE4D7AD0167255AA00A7EE69 /* util.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = util.cpp; sourceTree = "<group>"; };
+		CE4D7AD1167255AA00A7EE69 /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFrameworksBuildPhase section */
+		CE4D7AB01672553B00A7EE69 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
 /* Begin PBXGroup section */
-		B4F0432717E5C286006276B4 = {
+		CE4D7AA81672553B00A7EE69 = {
 			isa = PBXGroup;
 			children = (
-				B4F0434217E5C301006276B4 /* makefile */,
-				B4F0433217E5C2D5006276B4 /* DataParser.cpp */,
-				B4F0433317E5C2D5006276B4 /* DataParser.h */,
-				B4F0433417E5C2D5006276B4 /* DataProducer.cpp */,
-				B4F0433517E5C2D5006276B4 /* DataProducer.h */,
-				B4F0433617E5C2D5006276B4 /* define.h */,
-				B4F0433717E5C2D5006276B4 /* Delaunay.cpp */,
-				B4F0433817E5C2D5006276B4 /* Delaunay.h */,
-				B4F0433917E5C2D5006276B4 /* Face.cpp */,
-				B4F0433A17E5C2D5006276B4 /* Face.h */,
-				B4F0433B17E5C2D5006276B4 /* main.cpp */,
-				B4F0433C17E5C2D5006276B4 /* Point.cpp */,
-				B4F0433D17E5C2D5006276B4 /* Point.h */,
-				B4F0433E17E5C2D5006276B4 /* Simplex.cpp */,
-				B4F0433F17E5C2D5006276B4 /* Simplex.h */,
-				B4F0434017E5C2D5006276B4 /* util.cpp */,
-				B4F0434117E5C2D5006276B4 /* util.h */,
+				CE4D7AC1167255AA00A7EE69 /* DataParser.cpp */,
+				CE4D7AC2167255AA00A7EE69 /* DataParser.h */,
+				CE4D7AC3167255AA00A7EE69 /* DataProducer.cpp */,
+				CE4D7AC4167255AA00A7EE69 /* DataProducer.h */,
+				CE4D7AC5167255AA00A7EE69 /* define.h */,
+				CE4D7AC6167255AA00A7EE69 /* Delaunay.cpp */,
+				CE4D7AC7167255AA00A7EE69 /* Delaunay.h */,
+				CE4D7AC8167255AA00A7EE69 /* Face.cpp */,
+				CE4D7AC9167255AA00A7EE69 /* Face.h */,
+				CE4D7ACB167255AA00A7EE69 /* main.cpp */,
+				CE4D7ACC167255AA00A7EE69 /* Point.cpp */,
+				CE4D7ACD167255AA00A7EE69 /* Point.h */,
+				CE4D7ACE167255AA00A7EE69 /* Simplex.cpp */,
+				CE4D7ACF167255AA00A7EE69 /* Simplex.h */,
+				CE4D7AD0167255AA00A7EE69 /* util.cpp */,
+				CE4D7AD1167255AA00A7EE69 /* util.h */,
+				CE4D7AB61672553B00A7EE69 /* DelaunayVoronoi */,
+				CE4D7AB41672553B00A7EE69 /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		CE4D7AB41672553B00A7EE69 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CE4D7AB31672553B00A7EE69 /* DelaunayVoronoi */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CE4D7AB61672553B00A7EE69 /* DelaunayVoronoi */ = {
+			isa = PBXGroup;
+			children = (
+				CE4D7AB91672553B00A7EE69 /* DelaunayVoronoi.1 */,
+			);
+			path = DelaunayVoronoi;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
-/* Begin PBXLegacyTarget section */
-		B4F0432C17E5C286006276B4 /* DelaunayVoronoi */ = {
-			isa = PBXLegacyTarget;
-			buildArgumentsString = "$(ACTION)";
-			buildConfigurationList = B4F0432F17E5C286006276B4 /* Build configuration list for PBXLegacyTarget "DelaunayVoronoi" */;
+/* Begin PBXNativeTarget section */
+		CE4D7AB21672553B00A7EE69 /* DelaunayVoronoi */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE4D7ABD1672553B00A7EE69 /* Build configuration list for PBXNativeTarget "DelaunayVoronoi" */;
 			buildPhases = (
+				CE4D7AAF1672553B00A7EE69 /* Sources */,
+				CE4D7AB01672553B00A7EE69 /* Frameworks */,
+				CE4D7AB11672553B00A7EE69 /* CopyFiles */,
 			);
-			buildToolPath = /usr/bin/make;
+			buildRules = (
+			);
 			dependencies = (
 			);
 			name = DelaunayVoronoi;
-			passBuildSettingsInEnvironment = 1;
 			productName = DelaunayVoronoi;
+			productReference = CE4D7AB31672553B00A7EE69 /* DelaunayVoronoi */;
+			productType = "com.apple.product-type.tool";
 		};
-/* End PBXLegacyTarget section */
+/* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		B4F0432817E5C286006276B4 /* Project object */ = {
+		CE4D7AAA1672553B00A7EE69 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
-				ORGANIZATIONNAME = "Shenzhen Everytimes Technology Co., Ltd.";
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = wingyiu;
 			};
-			buildConfigurationList = B4F0432B17E5C286006276B4 /* Build configuration list for PBXProject "DelaunayVoronoi" */;
+			buildConfigurationList = CE4D7AAD1672553B00A7EE69 /* Build configuration list for PBXProject "DelaunayVoronoi" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = B4F0432717E5C286006276B4;
+			mainGroup = CE4D7AA81672553B00A7EE69;
+			productRefGroup = CE4D7AB41672553B00A7EE69 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B4F0432C17E5C286006276B4 /* DelaunayVoronoi */,
+				CE4D7AB21672553B00A7EE69 /* DelaunayVoronoi */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXSourcesBuildPhase section */
+		CE4D7AAF1672553B00A7EE69 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE4D7AD2167255AA00A7EE69 /* DataParser.cpp in Sources */,
+				CE4D7AD3167255AA00A7EE69 /* DataProducer.cpp in Sources */,
+				CE4D7AD4167255AA00A7EE69 /* Delaunay.cpp in Sources */,
+				CE4D7AD5167255AA00A7EE69 /* Face.cpp in Sources */,
+				CE4D7AD6167255AA00A7EE69 /* main.cpp in Sources */,
+				CE4D7AD7167255AA00A7EE69 /* Point.cpp in Sources */,
+				CE4D7AD8167255AA00A7EE69 /* Simplex.cpp in Sources */,
+				CE4D7AD9167255AA00A7EE69 /* util.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
 /* Begin XCBuildConfiguration section */
-		B4F0432D17E5C286006276B4 /* Debug */ = {
+		CE4D7ABB1672553B00A7EE69 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -110,7 +183,7 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
+					INFO,
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -124,17 +197,14 @@
 			};
 			name = Debug;
 		};
-		B4F0432E17E5C286006276B4 /* Release */ = {
+		CE4D7ABC1672553B00A7EE69 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -149,23 +219,16 @@
 			};
 			name = Release;
 		};
-		B4F0433017E5C286006276B4 /* Debug */ = {
+		CE4D7ABE1672553B00A7EE69 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DEBUGGING_SYMBOLS = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
-		B4F0433117E5C286006276B4 /* Release */ = {
+		CE4D7ABF1672553B00A7EE69 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -173,25 +236,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B4F0432B17E5C286006276B4 /* Build configuration list for PBXProject "DelaunayVoronoi" */ = {
+		CE4D7AAD1672553B00A7EE69 /* Build configuration list for PBXProject "DelaunayVoronoi" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B4F0432D17E5C286006276B4 /* Debug */,
-				B4F0432E17E5C286006276B4 /* Release */,
+				CE4D7ABB1672553B00A7EE69 /* Debug */,
+				CE4D7ABC1672553B00A7EE69 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B4F0432F17E5C286006276B4 /* Build configuration list for PBXLegacyTarget "DelaunayVoronoi" */ = {
+		CE4D7ABD1672553B00A7EE69 /* Build configuration list for PBXNativeTarget "DelaunayVoronoi" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B4F0433017E5C286006276B4 /* Debug */,
-				B4F0433117E5C286006276B4 /* Release */,
+				CE4D7ABE1672553B00A7EE69 /* Debug */,
+				CE4D7ABF1672553B00A7EE69 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = B4F0432817E5C286006276B4 /* Project object */;
+	rootObject = CE4D7AAA1672553B00A7EE69 /* Project object */;
 }
