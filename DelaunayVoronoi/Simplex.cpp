@@ -87,7 +87,9 @@ void Simplex::mergePoints()
 void Simplex::calculateCircumcenter()
 {
     double *c = new double[(m_dimension+1)*m_dimension]();
+    // cc用于输出
     double *cc = new double[m_dimension]();
+    // m_dimension+1个点
     for(unsigned i=0; i<=m_dimension; i++)
     {
         Point p = *(m_points.get()+i);
