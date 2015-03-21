@@ -84,23 +84,33 @@ double det_xxx(double *s, int n)
 }
 
 
+/*
+ * c:为d+1个d维点，
+ * d:维数
+ * cc:输出外心坐标
+ */
 void circumcenter(double *c, int d, double *cc)
 {
+    //d+1阶行列式
     double *m = new double[(d+1)*(d+1)];
+    //行列式第一列填充1
     for(int i=0; i<=d; i++)
     {
         m[i*(d+1)] = 1.0;
     }
-
+    //其他填充输入的d+1个点坐标
     for(int i=0; i<=d; i++)
         for(int j=1; j<=d; j++)
             m[i*(d+1)+j] = c[i*d+j-1];
-
+    
+    //行列式m的值
     double D = det(m, d+1);
+    // Dj[j]为替换m的第j+1列后的行列式的值
     double *Dj = new double[d];
+    // 用于替代j+1列
     double *tt = new double[d+1];
 
-    //tt
+    //计算tt，详情请看参考文献
     for(int i=0; i<=d; i++)
     {
         tt[i] = 0;
@@ -122,18 +132,21 @@ void circumcenter(double *c, int d, double *cc)
     //Dj
     for(int j=0; j<d; j++)
     {
+        //替换j+1列
         for(int i=0; i<=d; i++)
         {
             m[i*(d+1)+j+1] = tt[i];
         }
+        //行列式值
         Dj[j] = det(m, d+1);
-
+        //恢复j+1列
         for(int i=0; i<=d; i++)
         {
             m[i*(d+1)+j+1] = c[i*d+j];
         }
     }
 
+    //外心点，看参考文献
     for(int j=0; j<d; j++)
     {
         cc[j] = Dj[j] / D;

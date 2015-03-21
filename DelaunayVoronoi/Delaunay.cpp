@@ -131,9 +131,11 @@ void Delaunay::findContainSimplices(Point point)
 bool Delaunay::isIntersected(Simplex simplex, Point point)
 {
     Point cc = simplex.getCircumcenter();
+#ifdef DEBUG
     cc.toString();
     printf(" %f", simplex.getSquaredRadii());
     printf("\n");
+#endif
     double squaredDistance;
     squaredDistance = sq_distance(cc.getCoordinate(), point.getCoordinate(), m_dimension);
     // TODO change code blow

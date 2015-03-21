@@ -12,12 +12,14 @@ using namespace std;
 
 int main()
 {
+#ifdef DEBUG
     printf("short:%d\n", sizeof(short));
     printf("int:%d\n", sizeof(int));
     printf("long:%d\n", sizeof(long));
     printf("float:%d\n", sizeof(float));
     printf("double:%d\n", sizeof(double));
     printf("longlong:%d\n", sizeof(long long));
+#endif
 
     int dimension;
     
@@ -49,7 +51,6 @@ int main()
     }
     
     //output the circumsphere and radii of the simplexs order by radii
-    
     printf("Simplexs:\n");
     list<Simplex> tessell = del.getSortedCircumsphere();
     list<Simplex>::iterator it;
