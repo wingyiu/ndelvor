@@ -2,6 +2,9 @@
 #include <cstdio>
 using namespace std;
 
+#include <sys/times.h>
+#include <unistd.h>
+
 #include "DataParser.h"
 #include "Point.h"
 #include "Simplex.h"
@@ -27,9 +30,14 @@ int main()
     //DataParser dp("data.txt");
     //dimension = dp.getDimension();
     //printf("@dimension:%d\n\r", dimension);
-
     
-    dimension = 2;
+    struct tms tmsStart, tmsEnd;
+    clock_t start, end;
+    long clktck = sysconf(_SC_CLK_TCK);
+    
+    start = times(&tmsStart);
+    
+    dimension = 3;
     DataProducer dp(dimension);
 
 
@@ -49,6 +57,10 @@ int main()
         del.toString();
 #endif
     }
+    
+    end = times(&tmsEnd);
+    
+    printf("real: %7.2f\n", (end - start)/ (double)clktck);
     
     //output the circumsphere and radii of the simplexs order by radii
     printf("Simplexs:\n");
