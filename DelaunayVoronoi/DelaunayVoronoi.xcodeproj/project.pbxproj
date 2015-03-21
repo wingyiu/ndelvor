@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B42C65431ABD41FE007D15C1 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B42C65421ABD41FE007D15C1 /* Accelerate.framework */; };
 		CE4D7ABA1672553B00A7EE69 /* DelaunayVoronoi.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE4D7AB91672553B00A7EE69 /* DelaunayVoronoi.1 */; };
 		CE4D7AD2167255AA00A7EE69 /* DataParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE4D7AC1167255AA00A7EE69 /* DataParser.cpp */; };
 		CE4D7AD3167255AA00A7EE69 /* DataProducer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE4D7AC3167255AA00A7EE69 /* DataProducer.cpp */; };
@@ -32,6 +33,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B42C65421ABD41FE007D15C1 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		CE4D7AB31672553B00A7EE69 /* DelaunayVoronoi */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DelaunayVoronoi; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE4D7AB91672553B00A7EE69 /* DelaunayVoronoi.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = DelaunayVoronoi.1; sourceTree = "<group>"; };
 		CE4D7AC1167255AA00A7EE69 /* DataParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DataParser.cpp; sourceTree = "<group>"; };
@@ -57,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B42C65431ABD41FE007D15C1 /* Accelerate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +69,7 @@
 		CE4D7AA81672553B00A7EE69 = {
 			isa = PBXGroup;
 			children = (
+				B42C65421ABD41FE007D15C1 /* Accelerate.framework */,
 				CE4D7AC1167255AA00A7EE69 /* DataParser.cpp */,
 				CE4D7AC2167255AA00A7EE69 /* DataParser.h */,
 				CE4D7AC3167255AA00A7EE69 /* DataProducer.cpp */,
@@ -191,7 +195,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
@@ -214,7 +218,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -222,6 +226,16 @@
 		CE4D7ABE1672553B00A7EE69 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../lib/armadillo/include",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-O2",
+					"-DARMA_DONT_USE_WRAPPER",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -229,6 +243,16 @@
 		CE4D7ABF1672553B00A7EE69 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../lib/armadillo/include",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-O2",
+					"-DARMA_DONT_USE_WRAPPER",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -243,7 +267,7 @@
 				CE4D7ABC1672553B00A7EE69 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		CE4D7ABD1672553B00A7EE69 /* Build configuration list for PBXNativeTarget "DelaunayVoronoi" */ = {
 			isa = XCConfigurationList;
@@ -252,7 +276,7 @@
 				CE4D7ABF1672553B00A7EE69 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
