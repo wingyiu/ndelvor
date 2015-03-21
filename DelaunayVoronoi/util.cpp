@@ -1,5 +1,6 @@
 #include <cstdio>
 using namespace std;
+#include <armadillo>
 
 #define fabs(x) ((x)>0?(x):-(x))
 #define zero(x) (fabs(x)<1e-10)
@@ -104,7 +105,10 @@ void circumcenter(double *c, int d, double *cc)
             m[i*(d+1)+j] = c[i*d+j-1];
     
     //行列式m的值
-    double D = det(m, d+1);
+    //使用armadillo库计算行列式值
+    arma::mat orig = arma::mat(m, d+1, d+1, false);
+    double D = arma::det(orig);
+    
     // Dj[j]为替换m的第j+1列后的行列式的值
     double *Dj = new double[d];
     // 用于替代j+1列
@@ -137,8 +141,11 @@ void circumcenter(double *c, int d, double *cc)
         {
             m[i*(d+1)+j+1] = tt[i];
         }
+        
         //行列式值
-        Dj[j] = det(m, d+1);
+        //使用armadillo库计算行列式值
+        Dj[j] = arma::det(arma::mat(m, d+1, d+1, false));
+        
         //恢复j+1列
         for(int i=0; i<=d; i++)
         {
