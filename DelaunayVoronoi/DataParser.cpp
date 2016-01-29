@@ -31,8 +31,6 @@ Point DataParser::getNext()
 
 unsigned DataParser::getDimension()
 {
-    //int d = 0;
-    fscanf(m_file, " @dimension:%d", &m_dimension);
     return m_dimension;
 }
 
@@ -55,6 +53,7 @@ bool DataParser::isFileValid()
  DataParser::DataParser(const char *filename):m_file(NULL), m_filename(filename), m_dimension(0)
 {
     m_file = fopen(m_filename, "r");
+    fscanf(m_file, " @dimension:%d", &m_dimension);
 }
 
 

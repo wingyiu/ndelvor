@@ -34,6 +34,8 @@
 
 /* Begin PBXFileReference section */
 		B42C65421ABD41FE007D15C1 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		B4449A831B40F91E00EBF7C6 /* data.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = data.txt; sourceTree = "<group>"; };
+		B4449A841B40F93600EBF7C6 /* linux32.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = linux32.txt; sourceTree = "<group>"; };
 		CE4D7AB31672553B00A7EE69 /* DelaunayVoronoi */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DelaunayVoronoi; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE4D7AB91672553B00A7EE69 /* DelaunayVoronoi.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = DelaunayVoronoi.1; sourceTree = "<group>"; };
 		CE4D7AC1167255AA00A7EE69 /* DataParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DataParser.cpp; sourceTree = "<group>"; };
@@ -69,6 +71,8 @@
 		CE4D7AA81672553B00A7EE69 = {
 			isa = PBXGroup;
 			children = (
+				B4449A841B40F93600EBF7C6 /* linux32.txt */,
+				B4449A831B40F91E00EBF7C6 /* data.txt */,
 				B42C65421ABD41FE007D15C1 /* Accelerate.framework */,
 				CE4D7AC1167255AA00A7EE69 /* DataParser.cpp */,
 				CE4D7AC2167255AA00A7EE69 /* DataParser.h */,

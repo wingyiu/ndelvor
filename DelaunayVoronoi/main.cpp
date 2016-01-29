@@ -27,8 +27,8 @@ int main()
     int dimension;
     
     // read the points from file
-    //DataParser dp("data.txt");
-    //dimension = dp.getDimension();
+    DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data.txt");
+    dimension = dp.getDimension();
     //printf("@dimension:%d\n\r", dimension);
     
     struct tms tmsStart, tmsEnd;
@@ -37,8 +37,8 @@ int main()
     
     start = times(&tmsStart);
     
-    dimension = 3;
-    DataProducer dp(dimension);
+    //dimension = 3;
+    //DataProducer dp(dimension);
 
 
     Delaunay del(dimension);
@@ -68,8 +68,9 @@ int main()
     list<Simplex>::iterator it;
     for(it = tessell.begin(); it != tessell.end(); it++)
     {
+        printf("CC: ");
         (*it).getCircumcenter().toString();
-        printf(" %f\n", (*it).getSquaredRadii());
+        printf(" R:%f\n", (*it).getSquaredRadii());
     }
 
     return 0;

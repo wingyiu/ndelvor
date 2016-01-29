@@ -36,13 +36,18 @@ void Delaunay::addPoint(Point point)
 
 }
 
+/**
+ * 构造包含单位超立方的大单形
+ */
 void Delaunay::initialization()
 {
     Point *points = new Point[m_dimension+1];
 
     double *coords;
     coords = new double[m_dimension]();
+    //原点
     points[0] = Point(m_dimension, coords); //{0.0, ... , 0.0}
+    //其他点
     for(unsigned int i=1; i<= m_dimension; i++)
     {
         coords = new double[m_dimension];
@@ -50,7 +55,7 @@ void Delaunay::initialization()
         for(unsigned int j=0; j<m_dimension; j++)
         {
             if(i == j+1)
-                coords[j] = 2.0;
+                coords[j] = m_dimension;
             else coords[j] = 0.0;
         }
         Point pt = Point(m_dimension, coords);

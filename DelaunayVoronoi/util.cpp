@@ -69,9 +69,9 @@ double det_xxx(double *s, int n)
             }
 
                 if(z%2 == 0)
-                    r = s[z] * det(b, n-1);
+                    r = s[z] * det_xxx(b, n-1);
                 else
-                    r = (-1)*s[z]*det(b, n-1);
+                    r = (-1)*s[z]*det_xxx(b, n-1);
                 total = total + r;
 
         }
@@ -106,8 +106,8 @@ void circumcenter(double *c, int d, double *cc)
     
     //行列式m的值
     //使用armadillo库计算行列式值
-    arma::mat orig = arma::mat(m, d+1, d+1, false);
-    double D = arma::det(orig);
+    double D = arma::det(arma::mat(m, d+1, d+1, false));
+    //double D = det_xxx(m, d+1);
     
     // Dj[j]为替换m的第j+1列后的行列式的值
     double *Dj = new double[d];
@@ -145,6 +145,7 @@ void circumcenter(double *c, int d, double *cc)
         //行列式值
         //使用armadillo库计算行列式值
         Dj[j] = arma::det(arma::mat(m, d+1, d+1, false));
+        //Dj[j] = det_xxx(m, d+1);
         
         //恢复j+1列
         for(int i=0; i<=d; i++)
