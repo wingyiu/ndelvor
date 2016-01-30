@@ -80,6 +80,15 @@ void Delaunay::initialization()
     Simplex bound(m_dimension, faces);
     //printf("bound:0x%x\n\r", &bound);
     addSimplex(bound);
+    
+    // 测试点(1,1,1,...,1)是否被初始单形包含
+//    coords = new double[m_dimension];
+//    for(unsigned int j=0; j<m_dimension; j++)
+//        coords[j] = 0.9;
+//    Point p = Point(m_dimension, coords);
+//    int contained = bound.containedPoint(&p);
+//    printf("contained point: %d\n", contained);
+    
     delete [] points;
 }
 

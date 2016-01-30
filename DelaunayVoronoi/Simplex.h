@@ -21,6 +21,7 @@ public:
     const Face* getFaces() const;
     bool operator<(const Simplex & rhs) const;
     void addFaces(Face *faces);
+    int containedPoint(Point *point) const;
 protected:
 private:
     unsigned m_dimension;

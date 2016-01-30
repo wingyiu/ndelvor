@@ -106,8 +106,9 @@ void circumcenter(double *c, int d, double *cc)
     
     //行列式m的值
     //使用armadillo库计算行列式值
-    double D = arma::det(arma::mat(m, d+1, d+1, false));
+    //double D = arma::det(arma::mat(m, d+1, d+1, false));
     //double D = det_xxx(m, d+1);
+    double D = det(m, d+1);
     
     // Dj[j]为替换m的第j+1列后的行列式的值
     double *Dj = new double[d];
@@ -144,8 +145,9 @@ void circumcenter(double *c, int d, double *cc)
         
         //行列式值
         //使用armadillo库计算行列式值
-        Dj[j] = arma::det(arma::mat(m, d+1, d+1, false));
+        //Dj[j] = arma::det(arma::mat(m, d+1, d+1, false));
         //Dj[j] = det_xxx(m, d+1);
+        Dj[j] = det(m, d+1);
         
         //恢复j+1列
         for(int i=0; i<=d; i++)
@@ -174,3 +176,12 @@ double sq_distance(const double *pa, const double *pb, int d)
     }
     return sq_dis;
 }
+
+int sign(double v)
+{
+    if (v > 0) return 1;
+    if (v < 0) return -1;
+    return 0;
+}
+
+

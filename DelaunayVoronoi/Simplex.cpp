@@ -137,3 +137,65 @@ void FaceArrayDeleter::operator()(Face *p)
     p = NULL;
     //printf("Face[] deleted.\n\r");
 }
+
+
+int Simplex::containedPoint(Point *point) const
+{
+    // x0 = point
+    Point *x0 = point;
+    
+    double *Ajk = new double[m_dimension * m_dimension]();
+    // 构造A11, 排除第0个点，并减去第0个点的坐标值
+    Point x1 = *(m_points.get() + 0);
+    for(unsigned i=1; i<= m_dimension; i++)
+    {
+        Point xi = *(m_points.get()+i);
+        for(unsigned j=0; j<m_dimension; j++)
+        {
+            Ajk[(i-1)*m_dimension+j] = xi.getCoordinate()[j] - x1.getCoordinate()[j];
+        }
+    }
+    double detA11 = det(Ajk, m_dimension);
+    //printf("detA11 %lf\n", detA11);
+    int signDetA11 = sign(detA11);
+    printf("signDetA11 %d\n", signDetA11);
+    
+    int ret = 1; // inside the simplex
+    int signDetAjj = signDetA11;
+    // 依次求Aj0
+    for (int pi = 0; pi <= m_dimension; ++pi) {
+        //构造Aj0, 排除第pi个点，并减去x0的坐标值
+        for (int i=0, k=0; i<=m_dimension; ++i) {
+            if (i == pi) {
+                continue;
+            }
+            Point xi = *(m_points.get()+i);
+            for(unsigned j=0; j<m_dimension; j++)
+            {
+                Ajk[k*m_dimension+j] = xi.getCoordinate()[j] - (*x0).getCoordinate()[j];
+            }
+            ++k;
+        }
+        //求解sign(det(Aj0))
+        double detAj0 = det(Ajk, m_dimension);
+        //printf("detAj0 %lf\n", detAj0);
+        int signDetAj0 = sign(detAj0);
+        printf("signDetAj0 %d\n", signDetAj0);
+        
+        printf("signDetAjj %d\n", signDetAj0);
+        if (signDetAj0) {
+            if (signDetAj0 != signDetAjj) {
+                ret = -1;// outside the simplex
+                break;
+            }
+            signDetAjj = -signDetAjj;
+        } else {
+            // ==0 , at boundary
+            ret = 0; // on the simplex
+            break;
+        }
+
+    }
+    delete [] Ajk;
+    return ret;
+}
