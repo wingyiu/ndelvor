@@ -27,8 +27,8 @@ int main()
     int dimension;
     
     // read the points from file
-    //DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data.txt");
-    //dimension = dp.getDimension();
+    DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data.txt");
+    dimension = dp.getDimension();
     //printf("@dimension:%d\n\r", dimension);
     
     struct tms tmsStart, tmsEnd;
@@ -37,8 +37,8 @@ int main()
     
     start = times(&tmsStart);
     
-    dimension = 6;
-    DataProducer dp(dimension);
+    //dimension = 4;
+    //DataProducer dp(dimension);
 
 
     Delaunay del(dimension);
@@ -49,16 +49,19 @@ int main()
     del.toString();
 #endif
 
-    //while(dp.hasNext())
-    for(int i=0; i<100; i++)
+    while(dp.hasNext())
     {
-    	Point p = dp.getNext();
-        //Point p = dp.getNext();
+        Point p = dp.getNext();
+        p.setIndex();
         del.addPoint(p);
-#ifdef DEBUG
-        del.toString();
-#endif
     }
+    
+//    for(int i=0; i<100; i++)
+//    {
+//    	Point p = dp.getNext();
+//        p.setIndex();
+//        del.addPoint(p);
+//    }
     
     end = times(&tmsEnd);
     

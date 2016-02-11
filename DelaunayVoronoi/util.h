@@ -1,6 +1,9 @@
 #ifndef UTIL_H_INCLUDED
 #define UTIL_H_INCLUDED
 
+#define eps (1e-10)
+#define fabs(x) ((x)>0?(x):-(x))
+#define zero(x) (fabs(x)<1e-10)
 
 double det(double *s, int n);
 

@@ -1,4 +1,5 @@
 #include <set>
+#include <unordered_set>
 #include <cstdio>
 using namespace std;
 
@@ -50,11 +51,11 @@ bool Face::operator==(const Face& rhs)
 {
     const Point *pl = m_points.get();
     const Point *pr = rhs.getPoints();
-    set<const double*> s;
+    unordered_set<int> s;
     for(unsigned i=0; i<m_pointNum; i++)
     {
-        s.insert((pl+i)->getCoordinate());
-        s.insert((pr+i)->getCoordinate());
+        s.insert((pl+i)->getIndex());
+        s.insert((pr+i)->getIndex());
     }
     if(s.size() == m_pointNum)
         return true;

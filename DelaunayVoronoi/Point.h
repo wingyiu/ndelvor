@@ -15,12 +15,16 @@ public:
     const std::shared_ptr<double>& getSharedPtr() const;
     const double * getCoordinate() const;
     bool operator==(const Point& rhs);
+    int getIndex() const;
+    void setIndex();
 protected:
 
 private:
     unsigned m_dimension;
     //double *m_coordinate;
     std::shared_ptr<double> m_coordinate;
+    int m_index; //
+    static int pointCounter;
 };
 
 //template<class T>

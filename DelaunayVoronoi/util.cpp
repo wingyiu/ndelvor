@@ -1,9 +1,8 @@
 #include <cstdio>
 using namespace std;
 #include <armadillo>
+#include "util.h"
 
-#define fabs(x) ((x)>0?(x):-(x))
-#define zero(x) (fabs(x)<1e-10)
 
 double det(double* a, int n){
 	int i, j, k, sign=0;

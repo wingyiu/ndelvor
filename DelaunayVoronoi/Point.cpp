@@ -4,6 +4,7 @@ using std::printf;
 #include "Point.h"
 #include "define.h"
 
+int Point::pointCounter = 0;
 
 Point::Point():m_dimension(0)
 {
@@ -54,6 +55,16 @@ const double* Point::getCoordinate() const
 const std::shared_ptr<double>& Point::getSharedPtr() const
 {
     return m_coordinate;
+}
+
+int Point::getIndex() const
+{
+    return m_index;
+}
+
+void Point::setIndex()
+{
+    m_index = Point::pointCounter++;
 }
 
 bool Point::operator==(const Point& rhs)

@@ -47,6 +47,7 @@ void Delaunay::initialization()
     coords = new double[m_dimension]();
     //原点
     points[0] = Point(m_dimension, coords); //{0.0, ... , 0.0}
+    points[0].setIndex();
     //其他点
     for(unsigned int i=1; i<= m_dimension; i++)
     {
@@ -59,6 +60,7 @@ void Delaunay::initialization()
             else coords[j] = 0.0;
         }
         Point pt = Point(m_dimension, coords);
+        pt.setIndex();
         points[i] = pt;
     }
 
@@ -152,11 +154,10 @@ bool Delaunay::isIntersected(Simplex simplex, Point point)
 #endif
     double squaredDistance;
     squaredDistance = sq_distance(cc.getCoordinate(), point.getCoordinate(), m_dimension);
-    // TODO change code blow
-    //fabs(simplex.m_squareRadii - squaredDistance) > EPS
-    if(simplex.getSquaredRadii() > squaredDistance) //eps = 0.0000000000000000000000001
+    //if(simplex.getSquaredRadii() > squaredDistance)
+    if (simplex.getSquaredRadii() - squaredDistance > eps)
         return true;
-    else if(simplex.getSquaredRadii() < squaredDistance)
+    else if(simplex.getSquaredRadii() - squaredDistance < -eps)
         return false;
     else return true;
 
@@ -170,8 +171,6 @@ void Delaunay::formAndAddNewSimplices(Point point)
     for(it_tmp = m_tmpfaces.begin(); it_tmp != m_tmpfaces.end(); it_tmp++ )
     {
         p = *(it_tmp);
-//        p.first.toString();
-//        printf("%d\n\r", p.second);
         if(p.second == 1)
         {
             formAndAddNewSimplex(p.first,point);
