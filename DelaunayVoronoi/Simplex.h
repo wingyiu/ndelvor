@@ -22,11 +22,15 @@ public:
     bool operator<(const Simplex & rhs) const;
     void addFaces(Face *faces);
     int containedPoint(Point *point) const;
+    int getIndex() const;
+    void setIndex();
 protected:
 private:
     unsigned m_dimension;
     double m_squareRadii;
     Point m_circumcenter;
+    int m_index;
+    static int simplexCounter;
     std::shared_ptr<Point> m_points;
     std::shared_ptr<Face> m_faces; //array
 

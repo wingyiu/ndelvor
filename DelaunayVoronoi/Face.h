@@ -17,9 +17,13 @@ public:
     const Point * getPoints()const;
     void addPoints(Point *points);
     bool operator==(const Face &rhs);
+    int getIndex() const;
+    void setIndex();
 protected:
 private:
     unsigned m_pointNum;
+    int m_index;
+    static int faceCounter;
     std::shared_ptr<Point> m_points;
 };
 
@@ -28,5 +32,8 @@ class PointArrayDeleter
 public:
     void operator()(Point *);
 };
+
+template <class T>
+class FaceHash;
 
 #endif // FACE_H

@@ -29,7 +29,7 @@ void Delaunay::addPoint(Point point)
 		//
 		formAndAddNewSimplices(point);
 		//add the point to data point list
-		m_dataPoints.push_front(point);
+		m_dataPoints.push_back(point);
 		//clear the m_tmpFaces list
 		m_tmpfaces.clear();
 	}
@@ -63,6 +63,10 @@ void Delaunay::initialization()
         pt.setIndex();
         points[i] = pt;
     }
+    
+    for(unsigned int i=0; i<= m_dimension; i++) {
+        m_boundPoints.push_back(points[i]);
+    }
 
     Face *faces = new Face[m_dimension+1];
     for(unsigned int i=0; i<=m_dimension; i++)
@@ -75,12 +79,13 @@ void Delaunay::initialization()
         }
 
         Face ft = Face(m_dimension, pnts);
-
+        ft.setIndex();
         faces[i] = ft;
     }
 
     Simplex bound(m_dimension, faces);
     //printf("bound:0x%x\n\r", &bound);
+    bound.setIndex();
     addSimplex(bound);
     
     // 测试点(1,1,1,...,1)是否被初始单形包含
@@ -188,18 +193,20 @@ void Delaunay::formAndAddNewSimplex(Face face,Point point)
     for(unsigned i=0; i<m_dimension; i++)
     {
         tp = new Point[m_dimension];
-        tp[0] = point;
-        for(unsigned j=0, k=1; j<m_dimension; j++)
+        int k = 0;
+        for(unsigned j=0; j<m_dimension; j++)
         {
             if(i != j)
                 tp[k++] = p[j];
         }
+        
+        tp[k] = point;
         Face tf(m_dimension,tp);
+        tf.setIndex();
         f[i+1] = tf;
     }
     Simplex s(m_dimension,f);
-    //printf("1.before add to m_tessellation: 0x%x\n\r", &s);
-    //s.toString();
+    s.setIndex();
     addSimplex(s);
 }
 
@@ -207,10 +214,12 @@ const list<Simplex> & Delaunay::getSortedCircumsphere()
 {
     m_tessellation.sort();
     return m_tessellation;
-
 }
 
-
+const list<Point> & Delaunay::getPoints()
+{
+    return m_dataPoints;
+}
 
 void Delaunay::toString()
 {
@@ -218,9 +227,6 @@ void Delaunay::toString()
     for(it = m_tessellation.begin(); it != m_tessellation.end(); it++)
     {
         (*it).toString();
-        //printf("dimension:%d\n\r[", s.getDimension());
-        //Face *f = s.
-        //for()
     }
     printf("\n");
 }

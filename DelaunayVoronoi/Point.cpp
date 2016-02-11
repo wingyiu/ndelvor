@@ -32,19 +32,13 @@ Point::~Point()
 
 void Point::toString() const
 {
-//    printf("        Point[dimension:%d, coords:[", m_dimension);
-//    for(int i = 0; i<m_dimension; i++)
-//    {
-//        printf("%f, ", *(m_coordinate.get()+i));
-//    }
-//    //printf("%d, ", getCoordinate());
-//    printf("]]\n\r");
+    printf("<");
 	int i;
 	for(i = 0; i<m_dimension-1; i++)
 	{
-		printf("%f ", *(m_coordinate.get()+i));
+		printf("%f, ", *(m_coordinate.get()+i));
 	}
-	printf("%f", *(m_coordinate.get()+i));
+	printf("%f>", *(m_coordinate.get()+i));
 }
 
 const double* Point::getCoordinate() const
@@ -88,6 +82,11 @@ bool Point::operator==(const Point& rhs)
             return true;
         else return  false;
     }
+}
+
+bool Point::operator<(const Point& rhs)
+{
+    return this->getIndex() < rhs.getIndex();
 }
 
 void DoubleArrayDeleter::operator()(double *p)

@@ -7,6 +7,7 @@
 #include "Simplex.h"
 #include "util.h"
 
+int Simplex::simplexCounter = 0;
 
 Simplex::Simplex():m_dimension(0), m_faces((Face*)NULL)
 {
@@ -54,6 +55,16 @@ double Simplex::getSquaredRadii() const
     return m_squareRadii;
 }
 
+int Simplex::getIndex() const
+{
+    return m_index;
+}
+
+void Simplex::setIndex()
+{
+    m_index = simplexCounter++;
+}
+
 void Simplex::mergePoints()
 {
     Point *p = new Point[m_dimension+1];
@@ -63,17 +74,17 @@ void Simplex::mergePoints()
     }
 
     assert(m_dimension > 1);
-
+    
     for(unsigned i=0; i<m_dimension; i++)
     {
         Point pt = m_faces.get()[1].getPoints()[i];
         unsigned j;
-        for(j=0; j<m_dimension-1; j++) // j !!!!
+        for(j=0; j<m_dimension; j++) // j !!!!
         {
             if(pt == p[j])
                 break;
         }
-        if(j >= m_dimension-1)
+        if(j >= m_dimension)
         {
             p[m_dimension] = pt;
             break;
@@ -118,24 +129,19 @@ bool Simplex::operator<(const Simplex & rhs) const
 
 void Simplex::toString() const
 {
-    //printf("Simplex(0x%x)\n\r[dimension:%d, r^2:%f\n\r", this, m_dimension, m_squareRadii);
-    //printf("cc:");
-    //m_circumcenter.toString();
-    //printf("faces:[\n\r");
-    Face *f = m_faces.get();
+    Point *p = m_points.get();
+    printf("<");
     for(unsigned i = 0; i<= m_dimension; i++)
     {
-        (f+i)->toString();
-    //    printf(", ");
+        printf("%d,", (p+i)->getIndex());
     }
-    //printf("]]\n\r");
+    printf(">");
 }
 
 void FaceArrayDeleter::operator()(Face *p)
 {
     delete [] p;
     p = NULL;
-    //printf("Face[] deleted.\n\r");
 }
 
 

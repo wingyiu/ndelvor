@@ -1,9 +1,12 @@
 #include <set>
 #include <unordered_set>
 #include <cstdio>
+#include <functional>
 using namespace std;
 
 #include "Face.h"
+
+int Face::faceCounter = 0;
 
 Face::Face():m_pointNum(0), m_points((Point*)NULL)
 {
@@ -16,6 +19,17 @@ Face::Face(unsigned n):m_pointNum(n), m_points((Point*)NULL)
 
 Face::Face(unsigned n, Point* points):m_pointNum(n), m_points(points, PointArrayDeleter())
 {
+//    for (int i=0; i<m_pointNum; ++i) {
+//        printf("%d,", (m_points.get() + i)->getIndex());
+//    }
+//    printf("\n");
+    sort(m_points.get(), m_points.get() + m_pointNum, [](Point &a, Point &b){
+        return a.getIndex() < b.getIndex();
+    });
+//    for (int i=0; i<m_pointNum; ++i) {
+//        printf("%d,", (m_points.get() + i)->getIndex());
+//    }
+//    printf("\n");
 }
 
 Face::~Face()
@@ -33,6 +47,15 @@ const Point* Face::getPoints() const
     return m_points.get();
 }
 
+int Face::getIndex() const
+{
+    return m_index;
+}
+
+void Face::setIndex()
+{
+    m_index = Face::faceCounter++;
+}
 
 void Face::toString()
 {
@@ -40,10 +63,8 @@ void Face::toString()
 	unsigned i;
 	for(i=0; i<m_pointNum; i++)
 	{
-		printf(" ");
-		(p+i)->toString();
+		printf("%d,", (p+i)->getIndex());
 	}
-	printf("\n");
 }
 
 
@@ -71,3 +92,14 @@ void PointArrayDeleter::operator()(Point *p)
     p = NULL;
     //printf("Point[] deleted.\n");
 }
+
+
+template<>
+class FaceHash<Face>
+{
+public:
+    std::size_t operator()(Face const& f) const
+    {
+        return 0;
+    }
+};
