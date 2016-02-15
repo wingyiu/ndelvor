@@ -1,5 +1,5 @@
 #include <cstdio>
-
+#include <iostream>
 #include "Delaunay.h"
 #include "util.h"
 
@@ -118,25 +118,27 @@ void Delaunay::findContainSimplices(Point point)
         	//(*it).getCircumcenter().toString();printf(" %f", (*it).getSquaredRadii());printf("\n\r");
             //add its faces to m_tmpFace
             const Face *f = (*it).getFaces();
-            list<pair<Face, int> >::iterator it_tmp;
-            bool found;
+            //list<pair<Face, int> >::iterator it_tmp;
+            //bool found;
             for(unsigned i=0; i<=m_dimension; i++)
             {
+                ++m_tmpfaces[*(f+i)];
 
-                for(it_tmp = m_tmpfaces.begin(), found = false; it_tmp != m_tmpfaces.end(); it_tmp++)
-                {
-                    if((*it_tmp).first == *(f+i))
-                    {
-                        (*it_tmp).second ++;
-                        found = true;
-                        break;
-                    }
-                }
-                if(!found)
-                {
-                    pair<Face, int> p(*(f+i), 1);
-                    m_tmpfaces.push_front(p);
-                }
+//                for(it_tmp = m_tmpfaces.begin(), found = false; it_tmp != m_tmpfaces.end(); it_tmp++)
+//                {
+//                    if((*it_tmp).first == *(f+i))
+//                    {
+//                        (*it_tmp).second ++;
+//                        found = true;
+//                        break;
+//                    }
+//                }
+//                if(!found)
+//                {
+//                    pair<Face, int> p(*(f+i), 1);
+//                    m_tmpfaces.push_front(p);
+//                }
+                
             }
             //delete (*it)
             it = m_tessellation.erase(it); //
@@ -171,14 +173,15 @@ bool Delaunay::isIntersected(Simplex simplex, Point point)
 
 void Delaunay::formAndAddNewSimplices(Point point)
 {
-    list<pair<Face, int> >::iterator it_tmp;
-    pair<Face, int> p;
+    //list<pair<Face, int> >::iterator it_tmp;
+    //pair<Face, int> p;
+    std::unordered_map<Face, int, FaceHash, FaceEqual>::iterator it_tmp;
     for(it_tmp = m_tmpfaces.begin(); it_tmp != m_tmpfaces.end(); it_tmp++ )
     {
-        p = *(it_tmp);
+        auto p = *(it_tmp);
         if(p.second == 1)
         {
-            formAndAddNewSimplex(p.first,point);
+            formAndAddNewSimplex(p.first, point);
 
         }
     }
@@ -214,6 +217,11 @@ const list<Simplex> & Delaunay::getSortedCircumsphere()
 {
     m_tessellation.sort();
     return m_tessellation;
+}
+
+const list<Point> & Delaunay::getBoundPoints()
+{
+    return m_boundPoints;
 }
 
 const list<Point> & Delaunay::getPoints()

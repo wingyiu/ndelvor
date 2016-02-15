@@ -1,7 +1,11 @@
 #include <set>
 #include <unordered_set>
+#include <unordered_map>
 #include <cstdio>
 #include <functional>
+#include <string>
+#include <iostream>
+#include <cstdio>
 using namespace std;
 
 #include "Face.h"
@@ -19,17 +23,9 @@ Face::Face(unsigned n):m_pointNum(n), m_points((Point*)NULL)
 
 Face::Face(unsigned n, Point* points):m_pointNum(n), m_points(points, PointArrayDeleter())
 {
-//    for (int i=0; i<m_pointNum; ++i) {
-//        printf("%d,", (m_points.get() + i)->getIndex());
-//    }
-//    printf("\n");
     sort(m_points.get(), m_points.get() + m_pointNum, [](Point &a, Point &b){
         return a.getIndex() < b.getIndex();
     });
-//    for (int i=0; i<m_pointNum; ++i) {
-//        printf("%d,", (m_points.get() + i)->getIndex());
-//    }
-//    printf("\n");
 }
 
 Face::~Face()
@@ -40,6 +36,11 @@ Face::~Face()
 
 void Face::addPoints(Point* points)
 {
+}
+
+int Face::getPointNum() const
+{
+    return m_pointNum;
 }
 
 const Point* Face::getPoints() const
@@ -68,7 +69,7 @@ void Face::toString()
 }
 
 
-bool Face::operator==(const Face& rhs)
+bool Face::operator==(const Face& rhs) const
 {
     const Point *pl = m_points.get();
     const Point *pr = rhs.getPoints();
@@ -94,12 +95,21 @@ void PointArrayDeleter::operator()(Point *p)
 }
 
 
-template<>
-class FaceHash<Face>
+std::size_t FaceHash::operator()(const Face & f) const
 {
-public:
-    std::size_t operator()(Face const& f) const
-    {
-        return 0;
+    char num_str[20] = {0};
+    std::string pointSN;
+    const Point *ps = f.getPoints();
+    for (int i=0; i<f.getPointNum(); ++i) {
+        memset(num_str, 0, sizeof(num_str));
+        std::sprintf(num_str, "%d", ps[i].getIndex());
+        pointSN += num_str;
     }
-};
+    return std::hash<std::string>()(pointSN);
+}
+
+bool FaceEqual::operator()(const Face & lhs, const Face & rhs ) const
+{
+    return lhs == rhs;
+}
+

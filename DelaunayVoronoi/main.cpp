@@ -27,7 +27,7 @@ int main()
     int dimension;
     
     // read the points from file
-    DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data.txt");
+    DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data_2_10000.txt");
     dimension = dp.getDimension();
     //printf("@dimension:%d\n\r", dimension);
     
@@ -37,8 +37,8 @@ int main()
     
     start = times(&tmsStart);
     
-//    dimension = 3;
-//    DataProducer dp(dimension);
+    //dimension = 2;
+    //DataProducer dp(dimension);
 
 
     Delaunay del(dimension);
@@ -56,7 +56,7 @@ int main()
         del.addPoint(p);
     }
     
-//    for(int i=0; i<100; i++)
+//    for(int i=0; i<10000; i++)
 //    {
 //    	Point p = dp.getNext();
 //        p.setIndex();
@@ -67,8 +67,14 @@ int main()
     
     printf("cost real time: %7.2f\n", (end - start)/ (double)clktck);
     printf("Points:\n");
-    list<Point> points = del.getPoints();
+    list<Point> points = del.getBoundPoints();
     list<Point>::iterator it1;
+    for (it1 = points.begin(); it1 != points.end(); it1++) {
+        printf("[%d]", (*it1).getIndex());
+        (*it1).toString();
+        printf("\n");
+    }
+    points = del.getPoints();
     for (it1 = points.begin(); it1 != points.end(); it1++) {
         printf("[%d]", (*it1).getIndex());
         (*it1).toString();

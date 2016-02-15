@@ -14,9 +14,10 @@ public:
     Face(unsigned n, Point *points);
     ~Face();
     void toString();
+    int getPointNum() const;
     const Point * getPoints()const;
     void addPoints(Point *points);
-    bool operator==(const Face &rhs);
+    bool operator==(const Face &rhs) const;
     int getIndex() const;
     void setIndex();
 protected:
@@ -33,7 +34,17 @@ public:
     void operator()(Point *);
 };
 
-template <class T>
-class FaceHash;
 
+class FaceHash
+{
+public:
+    std::size_t operator()(const Face & f) const;
+};
+
+
+class FaceEqual
+{
+public:
+    bool operator()( const Face& lhs, const Face& rhs ) const;
+};
 #endif // FACE_H
