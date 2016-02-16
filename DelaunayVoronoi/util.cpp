@@ -20,8 +20,10 @@ double det(double* a, int n){
 				if (!zero(b[j*n+i]))
 					break;
 			
-            if (j == n)
+            if (j == n) {
+                delete[] b;
 				return 0;
+            }
 			
             for (k=i; k<n; k++)
 				t = b[i*n+k], b[i*n+k]=b[j*n+k], b[j*n+k] = t;
