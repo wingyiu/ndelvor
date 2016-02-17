@@ -82,15 +82,15 @@ int main()
     }
     //output the circumsphere and radii of the simplexs order by radii
     printf("Simplexs:\n");
-    list<Simplex> tessell = del.getSortedCircumsphere();
-    list<Simplex>::iterator it;
+    list<shared_ptr<Simplex>> tessell = del.getSortedCircumsphere();
+    list<shared_ptr<Simplex>>::iterator it;
     for(it = tessell.begin(); it != tessell.end(); it++)
     {
-        printf("[%d]CC:", (*it).getIndex());
-        (*it).getCircumcenter().toString();
-        printf(" RD:%f ", (*it).getSquaredRadii());
+        printf("[%d]CC:", (*(*it)).getIndex());
+        (*(*it)).getCircumcenter().toString();
+        printf(" RD:%f ", (*(*it)).getSquaredRadii());
         printf(" PS:");
-        (*it).toString();
+        (*(*it)).toString();
         printf("\n");
     }
 

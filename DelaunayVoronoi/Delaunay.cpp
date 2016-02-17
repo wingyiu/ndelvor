@@ -83,9 +83,11 @@ void Delaunay::initialization()
         faces[i] = ft;
     }
 
-    Simplex bound(m_dimension, faces);
+    shared_ptr<Simplex> bound = make_shared<Simplex>(m_dimension, faces);
     //printf("bound:0x%x\n\r", &bound);
-    bound.setIndex();
+    bound->setIndex();
+    // TODO adjacent
+    
     addSimplex(bound);
     
     // 测试点(1,1,1,...,1)是否被初始单形包含
@@ -100,7 +102,7 @@ void Delaunay::initialization()
 }
 
 
-Delaunay& Delaunay::addSimplex(Simplex simplex)
+Delaunay& Delaunay::addSimplex(shared_ptr<Simplex> simplex)
 {
 	//printf("2.before add to m_tessellation: 0x%x\n\r", &simplex);
     m_tessellation.push_front(simplex);
@@ -110,14 +112,14 @@ Delaunay& Delaunay::addSimplex(Simplex simplex)
 
 void Delaunay::findContainSimplices(Point point)
 {
-    list<Simplex>::iterator it;
+    list<shared_ptr<Simplex>>::iterator it;
     for(it = m_tessellation.begin(); it != m_tessellation.end(); )
     {
-        if(isIntersected((*it), point))
+        if(isIntersected(*(*it), point))
         {
         	//(*it).getCircumcenter().toString();printf(" %f", (*it).getSquaredRadii());printf("\n\r");
             //add its faces to m_tmpFace
-            const Face *f = (*it).getFaces();
+            const Face *f = (*(*it)).getFaces();
             //list<pair<Face, int> >::iterator it_tmp;
             //bool found;
             for(unsigned i=0; i<=m_dimension; i++)
@@ -208,12 +210,12 @@ void Delaunay::formAndAddNewSimplex(Face face,Point point)
         tf.setIndex();
         f[i+1] = tf;
     }
-    Simplex s(m_dimension,f);
-    s.setIndex();
+    shared_ptr<Simplex> s = make_shared<Simplex>(m_dimension, f);
+    s->setIndex();
     addSimplex(s);
 }
 
-const list<Simplex> & Delaunay::getSortedCircumsphere()
+const list<shared_ptr<Simplex>> & Delaunay::getSortedCircumsphere()
 {
     m_tessellation.sort();
     return m_tessellation;
@@ -231,10 +233,10 @@ const list<Point> & Delaunay::getPoints()
 
 void Delaunay::toString()
 {
-    list<Simplex>::iterator it;
+    list<shared_ptr<Simplex>>::iterator it;
     for(it = m_tessellation.begin(); it != m_tessellation.end(); it++)
     {
-        (*it).toString();
+        (*(*it)).toString();
     }
     printf("\n");
 }
