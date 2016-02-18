@@ -1,6 +1,7 @@
 #include <cstdio>
 #include <iostream>
 #include <cassert>
+#include <queue>
 #include "Delaunay.h"
 #include "util.h"
 
@@ -15,29 +16,6 @@ Delaunay::~Delaunay()
     //dtor
 }
 
-void Delaunay::addPoint(Point point)
-{
-    // find n-simplices whose circumsphere contain the new point
-    // flag these n-simplices to indicate deletion.
-#ifdef DEBUG
-	printf("Point adding:"); point.toString();printf("\n");
-#endif
-	//check whether the adding-point  unique
-	if(isUnique(point))
-	{
-		//
-		findContainSimplices(point);
-		//
-		formAndAddNewSimplices(point);
-		//add the point to data point list
-		m_dataPoints.push_back(point);
-		//clear the m_tmpFaces list
-		m_tmpfaces.clear();
-        m_tmpNewSimplices.clear();
-        m_pendingDeleteSimplices.clear();
-	}
-
-}
 
 /**
  * 构造包含单位超立方的大单形
@@ -116,30 +94,103 @@ Delaunay& Delaunay::addSimplex(shared_ptr<Simplex> simplex)
 }
 
 
+void Delaunay::addPoint(Point point)
+{
+    // find n-simplices whose circumsphere contain the new point
+    // flag these n-simplices to indicate deletion.
+#ifdef DEBUG
+    printf("Point adding:"); point.toString();printf("\n");
+#endif
+    //check whether the adding-point  unique
+    if(isUnique(point))
+    {
+        //
+        findContainSimplices(point);
+        //
+        formAndAddNewSimplices(point);
+        //add the point to data point list
+        m_dataPoints.push_back(point);
+        //clear the m_tmpFaces list
+        m_tmpfaces.clear();
+        m_tmpNewSimplices.clear();
+        for (auto it=m_pendingDeleteSimplices.begin(); it != m_pendingDeleteSimplices.end(); it++) {
+            m_tessellation.remove(*it);
+        }
+        m_pendingDeleteSimplices.clear();
+    }
+    
+}
+
+
 void Delaunay::findContainSimplices(Point point)
 {
+    queue<shared_ptr<Simplex>> queue;
+    // find one of the conflict simplices
     list<shared_ptr<Simplex>>::iterator it;
-    for(it = m_tessellation.begin(); it != m_tessellation.end(); )
+    for(it = m_tessellation.begin(); it != m_tessellation.end(); it++)
     {
         if(isIntersected(*(*it), point))
         {
+#ifdef DEBUG
+            printf("found first conflict simplex\n");
+#endif
         	// count face
             const Face *f = (*(*it)).getFaces();
-            for(unsigned i=0; i<=m_dimension; i++)
-            {
+            for(unsigned i=0; i<=m_dimension; i++) {
                 ++m_tmpfaces[*(f+i)];
-                
             }
             (*it)->willDelete = true;
             m_pendingDeleteSimplices.push_back(*it);
-            //remove (*it)
-            it = m_tessellation.erase(it);
-        }
-        else
-        {
-        	it++;
+            
+            queue.push(*it);
+            //stop after first was found
+            break;
         }
     }
+    
+    while (!queue.empty()) {
+        
+        shared_ptr<Simplex> s = queue.front();
+#ifdef DEBUG
+        printf("queue size: %lu\n", queue.size());
+        printf("dealing: ");
+        s->toString();
+        printf("\n");
+#endif
+        //
+        for (int i = 0; i <= m_dimension; ++i) {
+            Face f = s->getFaces()[i];
+            shared_ptr<Simplex> simplexPtr = s->getAdjacent(f);
+            
+            if (!simplexPtr.get()) {
+                continue;
+            }
+            
+            if (simplexPtr->willDelete){
+                continue;
+            }
+            
+            if(isIntersected(*simplexPtr, point))
+            {
+                // count face
+                const Face *f = simplexPtr->getFaces();
+                for(unsigned i=0; i<=m_dimension; i++) {
+                    ++m_tmpfaces[*(f+i)];
+                }
+                simplexPtr->willDelete = true;
+                m_pendingDeleteSimplices.push_back(simplexPtr);
+#ifdef DEBUG
+                printf("intersected: ");
+                simplexPtr->toString();
+                printf("\n");
+#endif
+                queue.push(simplexPtr);
+            }
+        }
+        queue.pop();
+        
+    }
+    
 }
 
 
