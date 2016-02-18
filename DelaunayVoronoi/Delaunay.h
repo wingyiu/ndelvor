@@ -29,11 +29,14 @@ private:
     list<Point> m_boundPoints;
     list<Point> m_dataPoints;
     unsigned m_dimension;
+    //all simplices composite the tessellation
     list<shared_ptr<Simplex>> m_tessellation;
-    //list<pair<Face, int> > m_tmpfaces;
-    unordered_map<Face, int, FaceHash, FaceEqual> m_tmpfaces;
-    //list:should be deleted
     //faces of intersected n-simplices and occur times
+    unordered_map<Face, int, FaceHash, FaceEqual> m_tmpfaces;
+    //new create simplices when add point
+    list<shared_ptr<Simplex>> m_tmpNewSimplices;
+    //
+    list<shared_ptr<Simplex>> m_pendingDeleteSimplices;
     void findContainSimplices(Point point);
     bool isIntersected(Simplex simplex, Point point);
     void formAndAddNewSimplices(Point point);

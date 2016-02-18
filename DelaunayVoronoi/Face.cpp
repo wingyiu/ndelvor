@@ -62,10 +62,12 @@ void Face::toString()
 {
 	Point *p = m_points.get();
 	unsigned i;
+    printf("[%d]<", m_index);
 	for(i=0; i<m_pointNum; i++)
 	{
 		printf("%d,", (p+i)->getIndex());
 	}
+    printf(">");
 }
 
 
@@ -112,4 +114,15 @@ bool FaceEqual::operator()(const Face & lhs, const Face & rhs ) const
 {
     return lhs == rhs;
 }
+
+shared_ptr<Simplex> Face::getSimplex()
+{
+    return m_simplex;
+}
+
+void Face::setSimplex(shared_ptr<Simplex> simplex)
+{
+    m_simplex = simplex;
+}
+
 

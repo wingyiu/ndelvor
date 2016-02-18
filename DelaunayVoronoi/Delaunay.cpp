@@ -1,5 +1,6 @@
 #include <cstdio>
 #include <iostream>
+#include <cassert>
 #include "Delaunay.h"
 #include "util.h"
 
@@ -32,6 +33,8 @@ void Delaunay::addPoint(Point point)
 		m_dataPoints.push_back(point);
 		//clear the m_tmpFaces list
 		m_tmpfaces.clear();
+        m_tmpNewSimplices.clear();
+        m_pendingDeleteSimplices.clear();
 	}
 
 }
@@ -86,8 +89,11 @@ void Delaunay::initialization()
     shared_ptr<Simplex> bound = make_shared<Simplex>(m_dimension, faces);
     //printf("bound:0x%x\n\r", &bound);
     bound->setIndex();
-    // TODO adjacent
-    
+    bound->updateFaceBelong(bound);
+    // adjacent
+    for(unsigned int i=0; i<=m_dimension; i++) {
+        bound->setAdjacent(faces[i], shared_ptr<Simplex>(NULL));
+    }
     addSimplex(bound);
     
     // 测试点(1,1,1,...,1)是否被初始单形包含
@@ -117,33 +123,17 @@ void Delaunay::findContainSimplices(Point point)
     {
         if(isIntersected(*(*it), point))
         {
-        	//(*it).getCircumcenter().toString();printf(" %f", (*it).getSquaredRadii());printf("\n\r");
-            //add its faces to m_tmpFace
+        	// count face
             const Face *f = (*(*it)).getFaces();
-            //list<pair<Face, int> >::iterator it_tmp;
-            //bool found;
             for(unsigned i=0; i<=m_dimension; i++)
             {
                 ++m_tmpfaces[*(f+i)];
-
-//                for(it_tmp = m_tmpfaces.begin(), found = false; it_tmp != m_tmpfaces.end(); it_tmp++)
-//                {
-//                    if((*it_tmp).first == *(f+i))
-//                    {
-//                        (*it_tmp).second ++;
-//                        found = true;
-//                        break;
-//                    }
-//                }
-//                if(!found)
-//                {
-//                    pair<Face, int> p(*(f+i), 1);
-//                    m_tmpfaces.push_front(p);
-//                }
                 
             }
-            //delete (*it)
-            it = m_tessellation.erase(it); //
+            (*it)->willDelete = true;
+            m_pendingDeleteSimplices.push_back(*it);
+            //remove (*it)
+            it = m_tessellation.erase(it);
         }
         else
         {
@@ -175,8 +165,6 @@ bool Delaunay::isIntersected(Simplex simplex, Point point)
 
 void Delaunay::formAndAddNewSimplices(Point point)
 {
-    //list<pair<Face, int> >::iterator it_tmp;
-    //pair<Face, int> p;
     std::unordered_map<Face, int, FaceHash, FaceEqual>::iterator it_tmp;
     for(it_tmp = m_tmpfaces.begin(); it_tmp != m_tmpfaces.end(); it_tmp++ )
     {
@@ -189,11 +177,17 @@ void Delaunay::formAndAddNewSimplices(Point point)
     }
 }
 
-void Delaunay::formAndAddNewSimplex(Face face,Point point)
+void Delaunay::formAndAddNewSimplex(Face face, Point point)
 {
+#ifdef DEBUG
+    face.toString();
+    printf("belong simplex:%d\n", face.getSimplex()->getIndex());
+#endif
     const Point *p = face.getPoints();
     Face *f = new Face[m_dimension+1];
     f[0] = face;
+    f[0].setIndex();
+    
     Point *tp = NULL;
     for(unsigned i=0; i<m_dimension; i++)
     {
@@ -210,8 +204,52 @@ void Delaunay::formAndAddNewSimplex(Face face,Point point)
         tf.setIndex();
         f[i+1] = tf;
     }
+    
     shared_ptr<Simplex> s = make_shared<Simplex>(m_dimension, f);
     s->setIndex();
+    s->updateFaceBelong(s);
+#ifdef DEBUG
+    s->toString();
+    printf("\n");
+#endif
+    //假设face原来属于D，且D与M共享face，且M不与插入点冲突，这新单形s与M共享face
+#ifdef DEBUG
+    f[0].toString();
+    printf("\n");
+#endif
+    shared_ptr<Simplex> neighbour = face.getSimplex()->getAdjacent(face);
+    //边界边邻居可能是空
+    if (neighbour.get()) {
+        assert(neighbour->willDelete == false);
+        neighbour->setAdjacent(neighbour->getFace(face), s);
+    }
+    s->setAdjacent(f[0], neighbour);
+    
+    //遍历新单行，逐个查找是否有与f[i]相同的面，有则他们相邻
+    for(int i=1; i<=m_dimension; i++)
+    {
+        list<shared_ptr<Simplex>>::iterator it;
+#ifdef DEBUG
+        f[i].toString();
+        printf("\n");
+#endif
+        for(it = m_tmpNewSimplices.begin(); it != m_tmpNewSimplices.end(); ++it)
+        {
+            // new simplex has face f[i]
+            if ((*it)->hasFace(f[i]))
+            {
+#ifdef DEBUG
+                printf("found adjacent face");
+                (*it)->getFace(f[i]).toString();
+                printf("\n");
+#endif
+                //(*it)->setAdjacent(f[i], s);
+                (*it)->setAdjacent((*it)->getFace(f[i]), s);
+                s->setAdjacent(f[i], *it);
+            }
+        }
+    }
+    m_tmpNewSimplices.push_back(s);
     addSimplex(s);
 }
 

@@ -6,6 +6,8 @@ using namespace std;
 
 #include "Point.h"
 
+class Simplex;
+
 class Face
 {
 public:
@@ -20,12 +22,15 @@ public:
     bool operator==(const Face &rhs) const;
     int getIndex() const;
     void setIndex();
+    shared_ptr<Simplex> getSimplex();
+    void setSimplex(shared_ptr<Simplex> simplex);
 protected:
 private:
     unsigned m_pointNum;
     int m_index;
     static int faceCounter;
-    std::shared_ptr<Point> m_points;
+    shared_ptr<Simplex> m_simplex;
+    shared_ptr<Point> m_points;
 };
 
 class PointArrayDeleter

@@ -20,6 +20,7 @@ Simplex::Simplex(unsigned dimension):m_dimension(dimension), m_faces((Face*)NULL
 
 Simplex::Simplex(unsigned dimension, Face* faces):m_dimension(dimension), m_faces(faces, FaceArrayDeleter())
 {
+    willDelete = false;
     mergePoints();
     calculateCircumcenter();
     calculateSquaredRadii();
@@ -121,16 +122,14 @@ void Simplex::calculateSquaredRadii()
 
 bool Simplex::operator<(const Simplex & rhs) const
 {
-    if(m_squareRadii > rhs.getSquaredRadii())
-        return true;
-    else return  false;
+    return m_squareRadii < rhs.getSquaredRadii();
 }
 
 
 void Simplex::toString() const
 {
     Point *p = m_points.get();
-    printf("<");
+    printf("[%d]<", m_index);
     for(unsigned i = 0; i<= m_dimension; i++)
     {
         printf("%d,", (p+i)->getIndex());
@@ -204,4 +203,49 @@ int Simplex::containedPoint(Point *point) const
     }
     delete [] Ajk;
     return ret;
+}
+
+
+void Simplex::setAdjacent(Face face, shared_ptr<Simplex> simplex)
+{
+    m_adjacent[face] = simplex;
+}
+
+shared_ptr<Simplex> Simplex::getAdjacent(Face face)
+{
+    auto search = m_adjacent.find(face);
+    if(search != m_adjacent.end()) {
+        return search->second;
+    } else {
+        return nullptr;
+    }
+}
+
+bool Simplex::hasFace(Face face)
+{
+    for(unsigned i=0; i<=m_dimension; i++)
+    {
+        if ((m_faces.get())[i] == face){
+            return true;
+        }
+    }
+    return false;
+}
+
+Face Simplex::getFace(Face face)
+{
+    for(unsigned i=0; i<=m_dimension; i++)
+    {
+        if ((m_faces.get())[i] == face){
+            return (m_faces.get())[i];
+        }
+    }
+}
+
+
+void Simplex::updateFaceBelong(shared_ptr<Simplex> simplex)
+{
+    for (int i=0; i<=m_dimension; ++i) {
+        (m_faces.get())[i].setSimplex(simplex);
+    }
 }

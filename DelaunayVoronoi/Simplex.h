@@ -2,6 +2,7 @@
 #define SIMPLEX_H
 
 #include <memory>
+#include <unordered_map>
 using namespace std;
 
 #include "Point.h"
@@ -24,6 +25,12 @@ public:
     int containedPoint(Point *point) const;
     int getIndex() const;
     void setIndex();
+    void setAdjacent(Face face, shared_ptr<Simplex> simplex);
+    shared_ptr<Simplex> getAdjacent(Face face);
+    bool hasFace(Face face);
+    Face getFace(Face face);
+    void updateFaceBelong(shared_ptr<Simplex>);
+    bool willDelete;
 protected:
 private:
     unsigned m_dimension;
@@ -33,7 +40,7 @@ private:
     static int simplexCounter;
     std::shared_ptr<Point> m_points;
     std::shared_ptr<Face> m_faces; //array
-
+    std::unordered_map<Face, shared_ptr<Simplex>, FaceHash, FaceEqual> m_adjacent;
     void mergePoints();
     void calculateCircumcenter();
     void calculateSquaredRadii();

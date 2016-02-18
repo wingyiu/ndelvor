@@ -27,6 +27,7 @@ int main()
     int dimension;
     
     // read the points from file
+    //DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data.txt");
     DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data_2_10000.txt");
     dimension = dp.getDimension();
     //printf("@dimension:%d\n\r", dimension);
@@ -81,7 +82,7 @@ int main()
         printf("\n");
     }
     //output the circumsphere and radii of the simplexs order by radii
-    printf("Simplexs:\n");
+    printf("Delaunay Simplexs:\n");
     list<shared_ptr<Simplex>> tessell = del.getSortedCircumsphere();
     list<shared_ptr<Simplex>>::iterator it;
     for(it = tessell.begin(); it != tessell.end(); it++)
@@ -91,8 +92,35 @@ int main()
         printf(" RD:%f ", (*(*it)).getSquaredRadii());
         printf(" PS:");
         (*(*it)).toString();
+        printf(" AD:{");
+        for (int i=0; i<=dimension; ++i) {
+            Face f = (*it)->getFaces()[i];
+            auto adjsimplex = (*it)->getAdjacent(f);
+            f.toString();
+            printf(":%d, ", adjsimplex.get() == NULL ? -1 : adjsimplex->getIndex());
+        }
+        printf("}");
         printf("\n");
     }
-
+    printf("Voronoi lines:\n");
+    for(it = tessell.begin(); it != tessell.end(); it++)
+    {
+        for (int i=0; i<=dimension; ++i) {
+            (*it)->getCircumcenter().toString();
+            printf("  ");
+            Face f = (*it)->getFaces()[i];
+            auto adjsimplex = (*it)->getAdjacent(f);
+            if (adjsimplex.get() == NULL) {
+                printf("<");
+                for (int j=0; j<dimension; ++j) {
+                    printf("∞,");
+                }
+                printf(">");
+            } else {
+                adjsimplex->getCircumcenter().toString();
+            }
+            printf("\n");
+        }
+    }
     return 0;
 }
