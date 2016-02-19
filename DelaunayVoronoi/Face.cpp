@@ -86,15 +86,14 @@ bool Face::operator==(const Face& rhs) const
 {
     const Point *pl = m_points.get();
     const Point *pr = rhs.getPoints();
-    unordered_set<int> s;
+    // 由于已经按点序号排序，直接逐一比较
     for(unsigned i=0; i<m_pointNum; i++)
     {
-        s.insert((pl+i)->getIndex());
-        s.insert((pr+i)->getIndex());
+        if ((pl+i)->getIndex() != (pr+i)->getIndex()){
+            return false;
+        }
     }
-    if(s.size() == m_pointNum)
-        return true;
-    else return false;
+    return true;
 }
 
 size_t Face::getHash() const
