@@ -19,10 +19,10 @@ public:
     ~Delaunay();
     void initialization();
     void addPoint(Point point);
-    Delaunay& addSimplex(shared_ptr<Simplex> simplex);
+    Delaunay& addSimplex(Simplex * simplex);
     const list<Point>& getBoundPoints();
     const list<Point>& getPoints();
-    const list<shared_ptr<Simplex>>& getSortedCircumsphere();
+    const list<Simplex *>& getSortedCircumsphere();
     void toString();
 protected:
 private:
@@ -30,13 +30,13 @@ private:
     list<Point> m_dataPoints;
     unsigned m_dimension;
     //all simplices composite the tessellation
-    list<shared_ptr<Simplex>> m_tessellation;
+    list<Simplex *> m_tessellation;
     //faces of intersected n-simplices and occur times
     unordered_map<Face, int, FaceHash, FaceEqual> m_tmpfaces;
     //new create simplices when add point
-    list<shared_ptr<Simplex>> m_tmpNewSimplices;
+    list<Simplex *> m_tmpNewSimplices;
     //
-    list<shared_ptr<Simplex>> m_pendingDeleteSimplices;
+    list<Simplex *> m_pendingDeleteSimplices;
     void findContainSimplices(Point point);
     bool isIntersected(Simplex simplex, Point point);
     void formAndAddNewSimplices(Point point);

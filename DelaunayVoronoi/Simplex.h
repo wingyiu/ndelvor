@@ -25,11 +25,11 @@ public:
     int containedPoint(Point *point) const;
     int getIndex() const;
     void setIndex();
-    void setAdjacent(Face face, shared_ptr<Simplex> simplex);
-    shared_ptr<Simplex> getAdjacent(Face face);
+    void setAdjacent(Face face, Simplex * simplex);
+    Simplex * getAdjacent(Face face);
     bool hasFace(Face face);
     Face getFace(Face face);
-    void updateFaceBelong(shared_ptr<Simplex>);
+    void updateFaceBelong(Simplex *);
     bool willDelete;
 protected:
 private:
@@ -40,7 +40,7 @@ private:
     static int simplexCounter;
     std::shared_ptr<Point> m_points;
     std::shared_ptr<Face> m_faces; //array
-    std::unordered_map<Face, shared_ptr<Simplex>, FaceHash, FaceEqual> m_adjacent;
+    std::unordered_map<Face, Simplex *, FaceHash, FaceEqual> m_adjacent;
     void mergePoints();
     void calculateCircumcenter();
     void calculateSquaredRadii();

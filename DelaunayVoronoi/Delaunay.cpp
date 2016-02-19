@@ -64,13 +64,13 @@ void Delaunay::initialization()
         faces[i] = ft;
     }
 
-    shared_ptr<Simplex> bound = make_shared<Simplex>(m_dimension, faces);
+    Simplex * bound = new Simplex(m_dimension, faces);
     //printf("bound:0x%x\n\r", &bound);
     bound->setIndex();
     bound->updateFaceBelong(bound);
     // adjacent
     for(unsigned int i=0; i<=m_dimension; i++) {
-        bound->setAdjacent(faces[i], shared_ptr<Simplex>(NULL));
+        bound->setAdjacent(faces[i], NULL);
     }
     addSimplex(bound);
     
@@ -86,7 +86,7 @@ void Delaunay::initialization()
 }
 
 
-Delaunay& Delaunay::addSimplex(shared_ptr<Simplex> simplex)
+Delaunay& Delaunay::addSimplex(Simplex * simplex)
 {
 	//printf("2.before add to m_tessellation: 0x%x\n\r", &simplex);
     m_tessellation.push_front(simplex);
@@ -114,6 +114,7 @@ void Delaunay::addPoint(Point point)
         m_tmpfaces.clear();
         m_tmpNewSimplices.clear();
         for (auto it=m_pendingDeleteSimplices.begin(); it != m_pendingDeleteSimplices.end(); it++) {
+            delete *it;
             m_tessellation.remove(*it);
         }
         m_pendingDeleteSimplices.clear();
@@ -124,9 +125,9 @@ void Delaunay::addPoint(Point point)
 
 void Delaunay::findContainSimplices(Point point)
 {
-    queue<shared_ptr<Simplex>> queue;
+    queue<Simplex *> queue;
     // find one of the conflict simplices
-    list<shared_ptr<Simplex>>::iterator it;
+    list<Simplex *>::iterator it;
     for(it = m_tessellation.begin(); it != m_tessellation.end(); it++)
     {
         if(isIntersected(*(*it), point))
@@ -150,7 +151,7 @@ void Delaunay::findContainSimplices(Point point)
     
     while (!queue.empty()) {
         
-        shared_ptr<Simplex> s = queue.front();
+        Simplex * s = queue.front();
 #ifdef DEBUG
         printf("queue size: %lu\n", queue.size());
         printf("dealing: ");
@@ -160,9 +161,9 @@ void Delaunay::findContainSimplices(Point point)
         //
         for (int i = 0; i <= m_dimension; ++i) {
             Face f = s->getFaces()[i];
-            shared_ptr<Simplex> simplexPtr = s->getAdjacent(f);
+            Simplex * simplexPtr = s->getAdjacent(f);
             
-            if (!simplexPtr.get()) {
+            if (simplexPtr == NULL) {
                 continue;
             }
             
@@ -256,7 +257,7 @@ void Delaunay::formAndAddNewSimplex(Face face, Point point)
         f[i+1] = tf;
     }
     
-    shared_ptr<Simplex> s = make_shared<Simplex>(m_dimension, f);
+    Simplex * s = new Simplex(m_dimension, f);
     s->setIndex();
     s->updateFaceBelong(s);
 #ifdef DEBUG
@@ -268,9 +269,9 @@ void Delaunay::formAndAddNewSimplex(Face face, Point point)
     f[0].toString();
     printf("\n");
 #endif
-    shared_ptr<Simplex> neighbour = face.getSimplex()->getAdjacent(face);
+    Simplex * neighbour = face.getSimplex()->getAdjacent(face);
     //边界边邻居可能是空
-    if (neighbour.get()) {
+    if (neighbour != NULL) {
         assert(neighbour->willDelete == false);
         neighbour->setAdjacent(neighbour->getFace(face), s);
     }
@@ -279,7 +280,7 @@ void Delaunay::formAndAddNewSimplex(Face face, Point point)
     //遍历新单行，逐个查找是否有与f[i]相同的面，有则他们相邻
     for(int i=1; i<=m_dimension; i++)
     {
-        list<shared_ptr<Simplex>>::iterator it;
+        list<Simplex *>::iterator it;
 #ifdef DEBUG
         f[i].toString();
         printf("\n");
@@ -304,7 +305,7 @@ void Delaunay::formAndAddNewSimplex(Face face, Point point)
     addSimplex(s);
 }
 
-const list<shared_ptr<Simplex>> & Delaunay::getSortedCircumsphere()
+const list<Simplex *> & Delaunay::getSortedCircumsphere()
 {
     m_tessellation.sort();
     return m_tessellation;
@@ -322,7 +323,7 @@ const list<Point> & Delaunay::getPoints()
 
 void Delaunay::toString()
 {
-    list<shared_ptr<Simplex>>::iterator it;
+    list<Simplex *>::iterator it;
     for(it = m_tessellation.begin(); it != m_tessellation.end(); it++)
     {
         (*(*it)).toString();

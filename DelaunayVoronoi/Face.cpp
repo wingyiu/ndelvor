@@ -121,12 +121,12 @@ bool FaceEqual::operator()(const Face & lhs, const Face & rhs ) const
     return lhs == rhs;
 }
 
-shared_ptr<Simplex> Face::getSimplex()
+Simplex * Face::getSimplex()
 {
     return m_simplex;
 }
 
-void Face::setSimplex(shared_ptr<Simplex> simplex)
+void Face::setSimplex(Simplex * simplex)
 {
     m_simplex = simplex;
 }

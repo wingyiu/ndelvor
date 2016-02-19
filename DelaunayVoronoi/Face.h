@@ -22,15 +22,15 @@ public:
     bool operator==(const Face &rhs) const;
     int getIndex() const;
     void setIndex();
-    shared_ptr<Simplex> getSimplex();
-    void setSimplex(shared_ptr<Simplex> simplex);
+    Simplex * getSimplex();
+    void setSimplex(Simplex * simplex);
     size_t getHash() const;
 protected:
 private:
     unsigned m_pointNum;
     int m_index;
     static int faceCounter;
-    shared_ptr<Simplex> m_simplex;
+    Simplex * m_simplex;
     shared_ptr<Point> m_points;
     size_t m_hash;
 };

@@ -206,18 +206,18 @@ int Simplex::containedPoint(Point *point) const
 }
 
 
-void Simplex::setAdjacent(Face face, shared_ptr<Simplex> simplex)
+void Simplex::setAdjacent(Face face, Simplex * simplex)
 {
     m_adjacent[face] = simplex;
 }
 
-shared_ptr<Simplex> Simplex::getAdjacent(Face face)
+Simplex * Simplex::getAdjacent(Face face)
 {
     auto search = m_adjacent.find(face);
     if(search != m_adjacent.end()) {
         return search->second;
     } else {
-        return nullptr;
+        return NULL;
     }
 }
 
@@ -243,7 +243,7 @@ Face Simplex::getFace(Face face)
 }
 
 
-void Simplex::updateFaceBelong(shared_ptr<Simplex> simplex)
+void Simplex::updateFaceBelong(Simplex * simplex)
 {
     for (int i=0; i<=m_dimension; ++i) {
         (m_faces.get())[i].setSimplex(simplex);

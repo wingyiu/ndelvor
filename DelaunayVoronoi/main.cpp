@@ -83,13 +83,13 @@ int main()
     }
     //output the circumsphere and radii of the simplexs order by radii
     printf("Delaunay Simplexs:\n");
-    list<shared_ptr<Simplex>> tessell = del.getSortedCircumsphere();
-    list<shared_ptr<Simplex>>::iterator it;
+    list<Simplex *> tessell = del.getSortedCircumsphere();
+    list<Simplex *>::iterator it;
     for(it = tessell.begin(); it != tessell.end(); it++)
     {
-        printf("[%d]CC:", (*(*it)).getIndex());
-        (*(*it)).getCircumcenter().toString();
-        printf(" RD:%f ", (*(*it)).getSquaredRadii());
+        printf("[%d]CC:", (*it)->getIndex());
+        (*it)->getCircumcenter().toString();
+        printf(" RD:%f ", (*it)->getSquaredRadii());
         printf(" PS:");
         (*(*it)).toString();
         printf(" AD:{");
@@ -97,7 +97,7 @@ int main()
             Face f = (*it)->getFaces()[i];
             auto adjsimplex = (*it)->getAdjacent(f);
             f.toString();
-            printf(":%d, ", adjsimplex.get() == NULL ? -1 : adjsimplex->getIndex());
+            printf(":%d, ", adjsimplex == NULL ? -1 : adjsimplex->getIndex());
         }
         printf("}");
         printf("\n");
@@ -109,8 +109,8 @@ int main()
             (*it)->getCircumcenter().toString();
             printf("  ");
             Face f = (*it)->getFaces()[i];
-            auto adjsimplex = (*it)->getAdjacent(f);
-            if (adjsimplex.get() == NULL) {
+            Simplex * adjsimplex = (*it)->getAdjacent(f);
+            if (adjsimplex == NULL) {
                 printf("<");
                 for (int j=0; j<dimension; ++j) {
                     printf("∞,");
@@ -121,6 +121,13 @@ int main()
             }
             printf("\n");
         }
+    }
+    
+    // free all simplex
+    for(it = tessell.begin(); it != tessell.end(); it++)
+    {
+        delete (*it);
+        
     }
     return 0;
 }
