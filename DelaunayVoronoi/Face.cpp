@@ -26,6 +26,17 @@ Face::Face(unsigned n, Point* points):m_pointNum(n), m_points(points, PointArray
     sort(m_points.get(), m_points.get() + m_pointNum, [](Point &a, Point &b){
         return a.getIndex() < b.getIndex();
     });
+    
+    //计算hash值
+    char num_str[20] = {0};
+    std::string pointSN;
+    const Point *ps = getPoints();
+    for (int i=0; i< m_pointNum; ++i) {
+        memset(num_str, 0, sizeof(num_str));
+        std::sprintf(num_str, "%d", ps[i].getIndex());
+        pointSN += num_str;
+    }
+    m_hash =  std::hash<std::string>()(pointSN);
 }
 
 Face::~Face()
@@ -86,7 +97,10 @@ bool Face::operator==(const Face& rhs) const
     else return false;
 }
 
-
+size_t Face::getHash() const
+{
+    return m_hash;
+}
 
 
 void PointArrayDeleter::operator()(Point *p)
@@ -99,15 +113,7 @@ void PointArrayDeleter::operator()(Point *p)
 
 std::size_t FaceHash::operator()(const Face & f) const
 {
-    char num_str[20] = {0};
-    std::string pointSN;
-    const Point *ps = f.getPoints();
-    for (int i=0; i<f.getPointNum(); ++i) {
-        memset(num_str, 0, sizeof(num_str));
-        std::sprintf(num_str, "%d", ps[i].getIndex());
-        pointSN += num_str;
-    }
-    return std::hash<std::string>()(pointSN);
+    return f.getHash();
 }
 
 bool FaceEqual::operator()(const Face & lhs, const Face & rhs ) const

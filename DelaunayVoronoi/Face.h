@@ -24,6 +24,7 @@ public:
     void setIndex();
     shared_ptr<Simplex> getSimplex();
     void setSimplex(shared_ptr<Simplex> simplex);
+    size_t getHash() const;
 protected:
 private:
     unsigned m_pointNum;
@@ -31,6 +32,7 @@ private:
     static int faceCounter;
     shared_ptr<Simplex> m_simplex;
     shared_ptr<Point> m_points;
+    size_t m_hash;
 };
 
 class PointArrayDeleter
