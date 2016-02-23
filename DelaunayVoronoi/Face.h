@@ -13,25 +13,25 @@ class Face
 public:
     Face();
     Face(unsigned n);
-    Face(unsigned n, Point *points);
+    Face(unsigned n, Point** points);
     ~Face();
-    void toString();
+    void toString() const;
     int getPointNum() const;
-    const Point * getPoints()const;
+    Point** getPoints()const;
     void addPoints(Point *points);
     bool operator==(const Face &rhs) const;
     int getIndex() const;
     void setIndex();
     Simplex * getSimplex();
-    void setSimplex(Simplex * simplex);
+    void setSimplex(Simplex* simplex);
     size_t getHash() const;
 protected:
 private:
     unsigned m_pointNum;
     int m_index;
     static int faceCounter;
-    Simplex * m_simplex;
-    shared_ptr<Point> m_points;
+    Simplex* m_simplex;
+    Point** m_points;
     size_t m_hash;
 };
 
@@ -45,13 +45,13 @@ public:
 class FaceHash
 {
 public:
-    std::size_t operator()(const Face & f) const;
+    std::size_t operator()(const Face* f) const;
 };
 
 
 class FaceEqual
 {
 public:
-    bool operator()( const Face& lhs, const Face& rhs ) const;
+    bool operator()( const Face* lhs, const Face* rhs ) const;
 };
 #endif // FACE_H

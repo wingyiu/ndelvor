@@ -11,7 +11,7 @@ Point::Point():m_dimension(0)
 }
 
 Point::Point(unsigned dimension, double *coordinate)
- :m_dimension(dimension), m_coordinate(coordinate, DoubleArrayDeleter())
+ :m_dimension(dimension), m_coordinate(coordinate)
 {
 
 }
@@ -26,6 +26,7 @@ Point::Point(unsigned dimension):m_dimension(dimension), m_coordinate((double*)N
 Point::~Point()
 {
     //dtor
+    delete [] m_coordinate;
 }
 
 
@@ -36,17 +37,12 @@ void Point::toString() const
 	int i;
 	for(i = 0; i<m_dimension-1; i++)
 	{
-		printf("%f, ", *(m_coordinate.get()+i));
+		printf("%f, ", *(m_coordinate+i));
 	}
-	printf("%f>", *(m_coordinate.get()+i));
+	printf("%f>", *(m_coordinate+i));
 }
 
 const double* Point::getCoordinate() const
-{
-    return m_coordinate.get();
-}
-
-const std::shared_ptr<double>& Point::getSharedPtr() const
 {
     return m_coordinate;
 }
@@ -63,7 +59,7 @@ void Point::setIndex()
 
 bool Point::operator==(const Point& rhs)
 {
-    const double *a = m_coordinate.get();
+    const double *a = m_coordinate;
     const double *b = rhs.getCoordinate();
     if(a == b)
         return true;

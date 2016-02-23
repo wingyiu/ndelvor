@@ -16,7 +16,7 @@ bool DataParser::hasNext()
 }
 
 
-Point DataParser::getNext()
+Point* DataParser::getNext()
 {
     double *coord = new double[m_dimension];
     for(int i=0; i<m_dimension; i++)
@@ -24,7 +24,7 @@ Point DataParser::getNext()
         fscanf(m_file, "%lf", coord+i);
         fscanf(m_file, "%*[ ,\n]");
     }
-    Point p(m_dimension, coord);
+    Point* p = new Point(m_dimension, coord);
     return p;
 }
 

@@ -13,7 +13,7 @@
 class DataProducer {
 public:
 	DataProducer(unsigned d);
-	Point getNext();
+	Point* getNext();
 
 	~DataProducer();
 

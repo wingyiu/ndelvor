@@ -16,7 +16,7 @@ public:
     bool isFileValid();
     unsigned getDimension();
     bool hasNext();
-    Point getNext();
+    Point* getNext();
 
 protected:
 private:

@@ -12,28 +12,28 @@ using namespace std;
 
 int Face::faceCounter = 0;
 
-Face::Face():m_pointNum(0), m_points((Point*)NULL)
+Face::Face():m_pointNum(0), m_points((Point**)NULL)
 {
     //default ctor
 }
 
-Face::Face(unsigned n):m_pointNum(n), m_points((Point*)NULL)
+Face::Face(unsigned n):m_pointNum(n), m_points((Point**)NULL)
 {
 }
 
-Face::Face(unsigned n, Point* points):m_pointNum(n), m_points(points, PointArrayDeleter())
+Face::Face(unsigned n, Point** points):m_pointNum(n), m_points(points)
 {
-    sort(m_points.get(), m_points.get() + m_pointNum, [](Point &a, Point &b){
-        return a.getIndex() < b.getIndex();
+    sort(m_points, m_points + m_pointNum, [](Point* a, Point* b){
+        return a->getIndex() < b->getIndex();
     });
     
     //计算hash值
     char num_str[20] = {0};
     std::string pointSN;
-    const Point *ps = getPoints();
+    Point** ps = getPoints();
     for (int i=0; i< m_pointNum; ++i) {
         memset(num_str, 0, sizeof(num_str));
-        std::sprintf(num_str, "%d", ps[i].getIndex());
+        std::sprintf(num_str, "%d", ps[i]->getIndex());
         pointSN += num_str;
     }
     m_hash =  std::hash<std::string>()(pointSN);
@@ -42,6 +42,7 @@ Face::Face(unsigned n, Point* points):m_pointNum(n), m_points(points, PointArray
 Face::~Face()
 {
     //dtor
+    delete [] m_points;
 }
 
 
@@ -54,9 +55,9 @@ int Face::getPointNum() const
     return m_pointNum;
 }
 
-const Point* Face::getPoints() const
+Point** Face::getPoints() const
 {
-    return m_points.get();
+    return m_points;
 }
 
 int Face::getIndex() const
@@ -69,14 +70,14 @@ void Face::setIndex()
     m_index = Face::faceCounter++;
 }
 
-void Face::toString()
+void Face::toString() const
 {
-	Point *p = m_points.get();
+	Point** p = m_points;
 	unsigned i;
     printf("[%d]<", m_index);
 	for(i=0; i<m_pointNum; i++)
 	{
-		printf("%d,", (p+i)->getIndex());
+		printf("%d,", p[i]->getIndex());
 	}
     printf(">");
 }
@@ -84,12 +85,18 @@ void Face::toString()
 
 bool Face::operator==(const Face& rhs) const
 {
-    const Point *pl = m_points.get();
-    const Point *pr = rhs.getPoints();
+//#ifdef DEBUG
+//    printf("==");
+//    toString();
+//    rhs.toString();
+//    printf("==\n");
+//#endif
+    Point** pl = m_points;
+    Point** pr = rhs.getPoints();
     // 由于已经按点序号排序，直接逐一比较
     for(unsigned i=0; i<m_pointNum; i++)
     {
-        if ((pl+i)->getIndex() != (pr+i)->getIndex()){
+        if (pl[i]->getIndex() != pr[i]->getIndex()){
             return false;
         }
     }
@@ -110,22 +117,22 @@ void PointArrayDeleter::operator()(Point *p)
 }
 
 
-std::size_t FaceHash::operator()(const Face & f) const
+std::size_t FaceHash::operator()(const Face* f) const
 {
-    return f.getHash();
+    return f->getHash();
 }
 
-bool FaceEqual::operator()(const Face & lhs, const Face & rhs ) const
+bool FaceEqual::operator()(const Face* lhs, const Face* rhs ) const
 {
-    return lhs == rhs;
+    return (*lhs) == (*rhs);
 }
 
-Simplex * Face::getSimplex()
+Simplex* Face::getSimplex()
 {
     return m_simplex;
 }
 
-void Face::setSimplex(Simplex * simplex)
+void Face::setSimplex(Simplex* simplex)
 {
     m_simplex = simplex;
 }

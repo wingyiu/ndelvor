@@ -16,14 +16,14 @@ DataProducer::DataProducer(unsigned d):m_dimension(d) {
 	srand((unsigned)time(0));
 }
 
-Point DataProducer::getNext()
+Point* DataProducer::getNext()
 {
 	double *coord = new double[m_dimension]();
 	for(unsigned i = 0; i<m_dimension; i++)
 	{
 		coord[i] = (double)rand()/(double)RAND_MAX;
 	}
-	return Point(m_dimension, coord);//???eff
+	return new Point(m_dimension, coord);//???eff
 }
 
 DataProducer::~DataProducer() {

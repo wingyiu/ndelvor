@@ -13,34 +13,34 @@ class Simplex
 public:
     Simplex();
     Simplex(unsigned dimension);
-    Simplex(unsigned dimension, Face *faces);
+    Simplex(unsigned dimension, Face** faces);
     ~Simplex();
     void toString() const;
     unsigned getDimension() const;
-    Point getCircumcenter() const;
+    Point* getCircumcenter() const;
     double getSquaredRadii() const;
-    const Face* getFaces() const;
-    bool operator<(const Simplex & rhs) const;
-    void addFaces(Face *faces);
-    int containedPoint(Point *point) const;
+    Face** getFaces() const;
+    bool operator<(const Simplex& rhs) const;
+    bool circumscribedPoint(Point* point) const;
+    int containedPoint(Point* point) const;
     int getIndex() const;
     void setIndex();
-    void setAdjacent(Face face, Simplex * simplex);
-    Simplex * getAdjacent(Face face);
-    bool hasFace(Face face);
-    Face getFace(Face face);
-    void updateFaceBelong(Simplex *);
+    void setAdjacent(Face* face, Simplex* simplex);
+    Simplex* getAdjacent(Face* face);
+    bool hasFace(Face* face);
+    Face* getFace(Face* face);
+    void updateFaceBelong(Simplex*);
     bool willDelete;
 protected:
 private:
     unsigned m_dimension;
     double m_squareRadii;
-    Point m_circumcenter;
+    Point* m_circumcenter;
     int m_index;
     static int simplexCounter;
-    std::shared_ptr<Point> m_points;
-    std::shared_ptr<Face> m_faces; //array
-    std::unordered_map<Face, Simplex *, FaceHash, FaceEqual> m_adjacent;
+    Point** m_points;
+    Face** m_faces; //array
+    std::unordered_map<Face*, Simplex *, FaceHash, FaceEqual> m_adjacent;
     void mergePoints();
     void calculateCircumcenter();
     void calculateSquaredRadii();

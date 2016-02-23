@@ -52,14 +52,14 @@ int main()
 
     while(dp.hasNext())
     {
-        Point p = dp.getNext();
-        p.setIndex();
+        Point* p = dp.getNext();
+        p->setIndex();
         del.addPoint(p);
     }
     
 //    for(int i=0; i<10000; i++)
 //    {
-//    	Point p = dp.getNext();
+//    	Point* p = dp.getNext();
 //        p.setIndex();
 //        del.addPoint(p);
 //    }
@@ -68,17 +68,17 @@ int main()
     
     printf("cost real time: %7.2f\n", (end - start)/ (double)clktck);
     printf("Points:\n");
-    list<Point> points = del.getBoundPoints();
-    list<Point>::iterator it1;
+    list<Point*> points = del.getBoundPoints();
+    list<Point*>::iterator it1;
     for (it1 = points.begin(); it1 != points.end(); it1++) {
-        printf("[%d]", (*it1).getIndex());
-        (*it1).toString();
+        printf("[%d]", (*it1)->getIndex());
+        (*it1)->toString();
         printf("\n");
     }
     points = del.getPoints();
     for (it1 = points.begin(); it1 != points.end(); it1++) {
-        printf("[%d]", (*it1).getIndex());
-        (*it1).toString();
+        printf("[%d]", (*it1)->getIndex());
+        (*it1)->toString();
         printf("\n");
     }
     //output the circumsphere and radii of the simplexs order by radii
@@ -88,15 +88,15 @@ int main()
     for(it = tessell.begin(); it != tessell.end(); it++)
     {
         printf("[%d]CC:", (*it)->getIndex());
-        (*it)->getCircumcenter().toString();
+        (*it)->getCircumcenter()->toString();
         printf(" RD:%f ", (*it)->getSquaredRadii());
         printf(" PS:");
         (*(*it)).toString();
         printf(" AD:{");
         for (int i=0; i<=dimension; ++i) {
-            Face f = (*it)->getFaces()[i];
-            auto adjsimplex = (*it)->getAdjacent(f);
-            f.toString();
+            Face* f = (*it)->getFaces()[i];
+            Simplex* adjsimplex = (*it)->getAdjacent(f);
+            f->toString();
             printf(":%d, ", adjsimplex == NULL ? -1 : adjsimplex->getIndex());
         }
         printf("}");
@@ -106,9 +106,9 @@ int main()
     for(it = tessell.begin(); it != tessell.end(); it++)
     {
         for (int i=0; i<=dimension; ++i) {
-            (*it)->getCircumcenter().toString();
+            (*it)->getCircumcenter()->toString();
             printf("  ");
-            Face f = (*it)->getFaces()[i];
+            Face* f = (*it)->getFaces()[i];
             Simplex * adjsimplex = (*it)->getAdjacent(f);
             if (adjsimplex == NULL) {
                 printf("<");
@@ -117,7 +117,7 @@ int main()
                 }
                 printf(">");
             } else {
-                adjsimplex->getCircumcenter().toString();
+                adjsimplex->getCircumcenter()->toString();
             }
             printf("\n");
         }
