@@ -27,8 +27,9 @@ int main()
     int dimension;
     
     // read the points from file
-    //DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data.txt");
-    DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data_2_10000.txt");
+    DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data.txt");
+    //DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data_2_10000.txt");
+    //DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data_3_10000.txt");
     dimension = dp.getDimension();
     //printf("@dimension:%d\n\r", dimension);
     
@@ -38,7 +39,7 @@ int main()
     
     start = times(&tmsStart);
     
-    //dimension = 2;
+    //dimension = 3;
     //DataProducer dp(dimension);
 
 
@@ -60,7 +61,7 @@ int main()
 //    for(int i=0; i<10000; i++)
 //    {
 //    	Point* p = dp.getNext();
-//        p.setIndex();
+//        p->setIndex();
 //        del.addPoint(p);
 //    }
     

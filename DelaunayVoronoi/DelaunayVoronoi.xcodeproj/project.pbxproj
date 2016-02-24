@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B40DE4A11C7C7E240097280A /* quadtree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B40DE49F1C7C7E240097280A /* quadtree.cpp */; };
 		B42C65431ABD41FE007D15C1 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B42C65421ABD41FE007D15C1 /* Accelerate.framework */; };
 		CE4D7ABA1672553B00A7EE69 /* DelaunayVoronoi.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = CE4D7AB91672553B00A7EE69 /* DelaunayVoronoi.1 */; };
 		CE4D7AD2167255AA00A7EE69 /* DataParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE4D7AC1167255AA00A7EE69 /* DataParser.cpp */; };
@@ -33,6 +34,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B40DE49F1C7C7E240097280A /* quadtree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = quadtree.cpp; sourceTree = "<group>"; };
+		B40DE4A01C7C7E240097280A /* quadtree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = quadtree.h; sourceTree = "<group>"; };
 		B42C65421ABD41FE007D15C1 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		B4449A831B40F91E00EBF7C6 /* data.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = data.txt; sourceTree = "<group>"; };
 		B4449A841B40F93600EBF7C6 /* linux32.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = linux32.txt; sourceTree = "<group>"; };
@@ -71,6 +74,8 @@
 		CE4D7AA81672553B00A7EE69 = {
 			isa = PBXGroup;
 			children = (
+				B40DE49F1C7C7E240097280A /* quadtree.cpp */,
+				B40DE4A01C7C7E240097280A /* quadtree.h */,
 				B4449A841B40F93600EBF7C6 /* linux32.txt */,
 				B4449A831B40F91E00EBF7C6 /* data.txt */,
 				B42C65421ABD41FE007D15C1 /* Accelerate.framework */,
@@ -166,6 +171,7 @@
 				CE4D7AD3167255AA00A7EE69 /* DataProducer.cpp in Sources */,
 				CE4D7AD4167255AA00A7EE69 /* Delaunay.cpp in Sources */,
 				CE4D7AD5167255AA00A7EE69 /* Face.cpp in Sources */,
+				B40DE4A11C7C7E240097280A /* quadtree.cpp in Sources */,
 				CE4D7AD6167255AA00A7EE69 /* main.cpp in Sources */,
 				CE4D7AD7167255AA00A7EE69 /* Point.cpp in Sources */,
 				CE4D7AD8167255AA00A7EE69 /* Simplex.cpp in Sources */,
