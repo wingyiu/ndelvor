@@ -118,11 +118,13 @@ void Delaunay::addPoint(Point* point)
         m_dataPoints.push_back(point);
         //clear the m_tmpFaces list
         m_tmpfaces.clear();
-        m_tmpNewSimplices.clear();
+        //m_tmpNewSimplices.clear();
+        
+        m_tessellation.remove_if([](Simplex* s){ return s->willDelete; }); // 很耗时 24%
         for (auto it=m_pendingDeleteSimplices.begin(); it != m_pendingDeleteSimplices.end(); it++) {
             delete *it;
-            m_tessellation.remove(*it); // 很耗时 24%
         }
+        m_tessellation.splice(m_tessellation.end(), m_tmpNewSimplices);
         m_pendingDeleteSimplices.clear();
     }
     
@@ -301,7 +303,7 @@ void Delaunay::formAndAddNewSimplex(Face* face, Point* point)
         }
     }
     m_tmpNewSimplices.push_back(s);
-    addSimplex(s);
+    //addSimplex(s);
 }
 
 const list<Simplex *> & Delaunay::getSimplices()
