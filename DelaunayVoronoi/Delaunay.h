@@ -22,7 +22,7 @@ public:
     Delaunay& addSimplex(Simplex* simplex);
     const list<Point*>& getBoundPoints();
     const list<Point*>& getPoints();
-    const list<Simplex*>& getSortedCircumsphere();
+    const list<Simplex*>& getSimplices();
     void toString();
 protected:
 private:

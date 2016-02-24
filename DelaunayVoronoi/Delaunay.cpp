@@ -95,7 +95,7 @@ void Delaunay::initialization()
 Delaunay& Delaunay::addSimplex(Simplex * simplex)
 {
 	//printf("2.before add to m_tessellation: 0x%x\n\r", &simplex);
-    m_tessellation.push_front(simplex);
+    m_tessellation.push_back(simplex);
     return *this;
 }
 
@@ -304,9 +304,8 @@ void Delaunay::formAndAddNewSimplex(Face* face, Point* point)
     addSimplex(s);
 }
 
-const list<Simplex *> & Delaunay::getSortedCircumsphere()
+const list<Simplex *> & Delaunay::getSimplices()
 {
-    m_tessellation.sort();
     return m_tessellation;
 }
 

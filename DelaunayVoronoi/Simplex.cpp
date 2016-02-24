@@ -271,3 +271,8 @@ void Simplex::updateFaceBelong(Simplex* simplex)
         m_faces[i]->setSimplex(simplex);
     }
 }
+
+int Simplex::getCounter()
+{
+    return simplexCounter;
+}

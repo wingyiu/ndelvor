@@ -31,6 +31,7 @@ public:
     Face* getFace(Face* face);
     void updateFaceBelong(Simplex*);
     bool willDelete;
+    static int getCounter();
 protected:
 private:
     unsigned m_dimension;

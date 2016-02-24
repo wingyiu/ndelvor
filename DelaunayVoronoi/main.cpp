@@ -27,8 +27,8 @@ int main()
     int dimension;
     
     // read the points from file
-    DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data.txt");
-    //DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data_2_10000.txt");
+    //DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data.txt");
+    DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data_2_10000.txt");
     //DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data_3_10000.txt");
     dimension = dp.getDimension();
     //printf("@dimension:%d\n\r", dimension);
@@ -82,9 +82,11 @@ int main()
         (*it1)->toString();
         printf("\n");
     }
+    printf("total created simplices count:%d\n", Simplex::getCounter());
+    printf("total valid simplices count:%ld\n", del.getSimplices().size());
     //output the circumsphere and radii of the simplexs order by radii
     printf("Delaunay Simplexs:\n");
-    list<Simplex *> tessell = del.getSortedCircumsphere();
+    list<Simplex *> tessell = del.getSimplices();
     list<Simplex *>::iterator it;
     for(it = tessell.begin(); it != tessell.end(); it++)
     {
