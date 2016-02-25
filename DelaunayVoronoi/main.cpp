@@ -28,9 +28,9 @@ int main()
     
     // read the points from file
     //DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data.txt");
-    DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data_2_10000.txt");
+    //DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data_2_10000.txt");
     //DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data_3_10000.txt");
-    dimension = dp.getDimension();
+    //dimension = dp.getDimension();
     //printf("@dimension:%d\n\r", dimension);
     
     struct tms tmsStart, tmsEnd;
@@ -39,8 +39,8 @@ int main()
     
     start = times(&tmsStart);
     
-    //dimension = 3;
-    //DataProducer dp(dimension);
+    dimension = 10;
+    DataProducer dp(dimension);
 
 
     Delaunay del(dimension);
@@ -51,19 +51,19 @@ int main()
     del.toString();
 #endif
 
-    while(dp.hasNext())
-    {
-        Point* p = dp.getNext();
-        p->setIndex();
-        del.addPoint(p);
-    }
-    
-//    for(int i=0; i<10000; i++)
+//    while(dp.hasNext())
 //    {
-//    	Point* p = dp.getNext();
+//        Point* p = dp.getNext();
 //        p->setIndex();
 //        del.addPoint(p);
 //    }
+    
+    for(int i=0; i<50; i++)
+    {
+    	Point* p = dp.getNext();
+        p->setIndex();
+        del.addPoint(p);
+    }
     
     end = times(&tmsEnd);
     
@@ -84,47 +84,48 @@ int main()
     }
     printf("total created simplices count:%d\n", Simplex::getCounter());
     printf("total valid simplices count:%ld\n", del.getSimplices().size());
-    //output the circumsphere and radii of the simplexs order by radii
-    printf("Delaunay Simplexs:\n");
+
     list<Simplex *> tessell = del.getSimplices();
     list<Simplex *>::iterator it;
-    for(it = tessell.begin(); it != tessell.end(); it++)
-    {
-        printf("[%d]CC:", (*it)->getIndex());
-        (*it)->getCircumcenter()->toString();
-        printf(" RD:%f ", (*it)->getSquaredRadii());
-        printf(" PS:");
-        (*(*it)).toString();
-        printf(" AD:{");
-        for (int i=0; i<=dimension; ++i) {
-            Face* f = (*it)->getFaces()[i];
-            Simplex* adjsimplex = (*it)->getAdjacent(f);
-            f->toString();
-            printf(":%d, ", adjsimplex == NULL ? -1 : adjsimplex->getIndex());
-        }
-        printf("}");
-        printf("\n");
-    }
-    printf("Voronoi lines:\n");
-    for(it = tessell.begin(); it != tessell.end(); it++)
-    {
-        for (int i=0; i<=dimension; ++i) {
-            (*it)->getCircumcenter()->toString();
-            printf("  ");
-            Face* f = (*it)->getFaces()[i];
-            Simplex * adjsimplex = (*it)->getAdjacent(f);
-            if (adjsimplex == NULL) {
-                printf("<");
-                for (int j=0; j<dimension; ++j) {
-                    printf("∞,");
-                }
-                printf(">");
-            } else {
-                adjsimplex->getCircumcenter()->toString();
-            }
-            printf("\n");
-        }
-    }
+    //output the circumsphere and radii of the simplexs order by radii
+//    printf("Delaunay Simplexs:\n");
+//    for(it = tessell.begin(); it != tessell.end(); it++)
+//    {
+//        printf("[%d]CC:", (*it)->getIndex());
+//        (*it)->getCircumcenter()->toString();
+//        printf(" RD:%f ", (*it)->getSquaredRadii());
+//        printf(" PS:");
+//        (*(*it)).toString();
+//        printf(" AD:{");
+//        for (int i=0; i<=dimension; ++i) {
+//            Face* f = (*it)->getFaces()[i];
+//            Simplex* adjsimplex = (*it)->getAdjacent(f);
+//            f->toString();
+//            printf(":%d, ", adjsimplex == NULL ? -1 : adjsimplex->getIndex());
+//        }
+//        printf("}");
+//        printf("\n");
+//    }
+//    printf("Voronoi lines:\n");
+//    for(it = tessell.begin(); it != tessell.end(); it++)
+//    {
+//        for (int i=0; i<=dimension; ++i) {
+//            (*it)->getCircumcenter()->toString();
+//            printf("  ");
+//            Face* f = (*it)->getFaces()[i];
+//            Simplex * adjsimplex = (*it)->getAdjacent(f);
+//            if (adjsimplex == NULL) {
+//                printf("<");
+//                for (int j=0; j<dimension; ++j) {
+//                    printf("∞,");
+//                }
+//                printf(">");
+//            } else {
+//                adjsimplex->getCircumcenter()->toString();
+//            }
+//            printf("\n");
+//        }
+//    }
     
     // free all simplex
     for(it = tessell.begin(); it != tessell.end(); it++)
