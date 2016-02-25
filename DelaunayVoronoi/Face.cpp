@@ -94,13 +94,14 @@ bool Face::operator==(const Face& rhs) const
     Point** pl = m_points;
     Point** pr = rhs.getPoints();
     // 由于已经按点序号排序，直接逐一比较
-    for(unsigned i=0; i<m_pointNum; i++)
-    {
-        if (pl[i]->getIndex() != pr[i]->getIndex()){
-            return false;
-        }
-    }
-    return true;
+//    for(unsigned i=0; i<m_pointNum; i++)
+//    {
+//        if (pl[i] != pr[i]){
+//            return false;
+//        }
+//    }
+//    return true;
+    return memcmp(pl, pr, sizeof(Point*)*m_pointNum) == 0;
 }
 
 size_t Face::getHash() const

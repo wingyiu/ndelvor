@@ -28,9 +28,10 @@ int main()
     
     // read the points from file
     //DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data.txt");
-    //DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data_2_10000.txt");
+    DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data_2_10000.txt");
     //DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data_3_10000.txt");
-    //dimension = dp.getDimension();
+    //DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data_4_10000.txt");
+    dimension = dp.getDimension();
     //printf("@dimension:%d\n\r", dimension);
     
     struct tms tmsStart, tmsEnd;
@@ -39,8 +40,8 @@ int main()
     
     start = times(&tmsStart);
     
-    dimension = 10;
-    DataProducer dp(dimension);
+    //dimension = 6;
+    //DataProducer dp(dimension);
 
 
     Delaunay del(dimension);
@@ -51,20 +52,20 @@ int main()
     del.toString();
 #endif
 
-//    while(dp.hasNext())
-//    {
-//        Point* p = dp.getNext();
-//        p->setIndex();
-//        del.addPoint(p);
-//    }
-    
-    for(int i=0; i<50; i++)
+    while(dp.hasNext())
     {
-    	Point* p = dp.getNext();
+        Point* p = dp.getNext();
         p->setIndex();
         del.addPoint(p);
     }
-    
+
+//    for(int i=0; i<1000; i++)
+//    {
+//    	Point* p = dp.getNext();
+//        p->setIndex();
+//        del.addPoint(p);
+//    }
+
     end = times(&tmsEnd);
     
     printf("cost real time: %7.2f\n", (end - start)/ (double)clktck);
