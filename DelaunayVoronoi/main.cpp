@@ -28,9 +28,9 @@ int main()
     
     // read the points from file
     //DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data.txt");
-    DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data_2_10000.txt");
+    //DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data_2_10000.txt");
     //DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data_3_10000.txt");
-    //DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data_4_10000.txt");
+    DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data_4_10000.txt");
     dimension = dp.getDimension();
     //printf("@dimension:%d\n\r", dimension);
     

@@ -33,6 +33,7 @@ private:
     list<Simplex*> m_tessellation;
     //faces of intersected n-simplices and occur times
     unordered_map<Face*, int, FaceHash, FaceEqual> m_tmpfaces;
+    unordered_map<Face*, Simplex*, FaceHash, FaceEqual> m_newfacesBelong;
     //new create simplices when add point
     list<Simplex*> m_tmpNewSimplices;
     //

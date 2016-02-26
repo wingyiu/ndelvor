@@ -126,6 +126,7 @@ void Delaunay::addPoint(Point* point)
         }
         m_tessellation.splice(m_tessellation.end(), m_tmpNewSimplices);
         m_pendingDeleteSimplices.clear();
+        m_newfacesBelong.clear();
     }
     
 }
@@ -281,26 +282,36 @@ void Delaunay::formAndAddNewSimplex(Face* face, Point* point)
     //遍历新单行，逐个查找是否有与f[i]相同的面，有则他们相邻
     for(int i=1; i<=m_dimension; i++)
     {
-        list<Simplex *>::iterator it;
-#ifdef DEBUG
-        f[i]->toString();
-        printf("\n");
-#endif
-        for(it = m_tmpNewSimplices.begin(); it != m_tmpNewSimplices.end(); ++it)
-        {
-            // new simplex has face f[i]
-            if ((*it)->hasFace(f[i]))
-            {
-#ifdef DEBUG
-                printf("found adjacent face");
-                (*it)->getFace(f[i])->toString();
-                printf("\n");
-#endif
-                //(*it)->setAdjacent(f[i], s);
-                (*it)->setAdjacent((*it)->getFace(f[i]), s);
-                s->setAdjacent(f[i], *it);
-            }
+        //尝试找到f[i]所属simplex
+        unordered_map<Face*, Simplex*, FaceHash, FaceEqual>::const_iterator map_it = m_newfacesBelong.find(f[i]);
+        if (map_it != m_newfacesBelong.end()) {
+            (map_it->second)->setAdjacent((map_it->second)->getFace(f[i]), s);
+            s->setAdjacent(f[i], map_it->second);
+            //remove from map
+            m_newfacesBelong.erase(map_it);
+        } else {
+            m_newfacesBelong[f[i]] = s;
         }
+//        list<Simplex *>::iterator it;
+//#ifdef DEBUG
+//        f[i]->toString();
+//        printf("\n");
+//#endif
+//        for(it = m_tmpNewSimplices.begin(); it != m_tmpNewSimplices.end(); ++it)
+//        {
+//            // new simplex has face f[i]
+//            if ((*it)->hasFace(f[i]))
+//            {
+//#ifdef DEBUG
+//                printf("found adjacent face");
+//                (*it)->getFace(f[i])->toString();
+//                printf("\n");
+//#endif
+//                //(*it)->setAdjacent(f[i], s);
+//                (*it)->setAdjacent((*it)->getFace(f[i]), s);
+//                s->setAdjacent(f[i], *it);
+//            }
+//        }
     }
     m_tmpNewSimplices.push_back(s);
     //addSimplex(s);
