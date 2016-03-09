@@ -24,8 +24,10 @@ public:
     const list<Point*>& getPoints();
     const list<Simplex*>& getSimplices();
     void toString();
+    const Simplex* getDE();
 protected:
 private:
+    Simplex* DE;
     list<Point*> m_boundPoints;
     list<Point*> m_dataPoints;
     unsigned m_dimension;

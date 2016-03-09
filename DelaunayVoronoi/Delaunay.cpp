@@ -13,6 +13,7 @@ Delaunay::Delaunay(unsigned dimension):m_dimension(dimension)
 
 Delaunay::~Delaunay()
 {
+    delete DE;
     //dtor
     for (auto it = m_boundPoints.begin(); it != m_boundPoints.end(); it++) {
         delete *it;
@@ -28,6 +29,9 @@ Delaunay::~Delaunay()
  */
 void Delaunay::initialization()
 {
+    // 特殊的单形
+    DE = new Simplex();
+    
     Point** points = new Point*[m_dimension+1];
 
     double *coords;
@@ -76,7 +80,7 @@ void Delaunay::initialization()
     bound->updateFaceBelong(bound);
     // adjacent
     for(unsigned int i=0; i<=m_dimension; i++) {
-        bound->setAdjacent(faces[i], NULL);
+        bound->setAdjacent(faces[i], DE);
     }
     addSimplex(bound);
     
@@ -177,7 +181,7 @@ void Delaunay::findContainSimplices(Point* point)
 #endif
             Simplex* simplexPtr = s->getAdjacent(f);
             
-            if (simplexPtr == NULL) {
+            if (simplexPtr == DE) {
                 continue;
             }
             
@@ -221,6 +225,7 @@ void Delaunay::formAndAddNewSimplices(Point* point)
 
         }
     }
+    assert(m_newfacesBelong.size() == 0);
 }
 
 void Delaunay::formAndAddNewSimplex(Face* face, Point* point)
@@ -273,7 +278,7 @@ void Delaunay::formAndAddNewSimplex(Face* face, Point* point)
     printf("\n");
 #endif
     //边界边邻居可能是空
-    if (neighbour != NULL) {
+    if (neighbour != DE) {
         assert(neighbour->willDelete == false);
         neighbour->setAdjacent(neighbour->getFace(face), s);
     }
@@ -355,6 +360,11 @@ bool Delaunay::isUnique(Point* point)
 		}
 	}
 	return uk;
+}
+
+const Simplex* Delaunay::getDE()
+{
+    return DE;
 }
 
 

@@ -29,12 +29,15 @@ Simplex::Simplex(unsigned dimension, Face** faces):m_dimension(dimension), m_fac
 Simplex::~Simplex()
 {
     //dtor
-    delete m_circumcenter;
-    delete [] m_points;
-    for (int i = 0; i <= m_dimension; ++i) {
-        delete m_faces[i];
+    if (m_faces) {
+        delete m_circumcenter;
+        delete [] m_points;
+        for (int i = 0; i <= m_dimension; ++i) {
+            delete m_faces[i];
+        }
+        delete [] m_faces;
     }
-    delete [] m_faces;
+    
 }
 
 unsigned Simplex::getDimension() const
@@ -235,11 +238,17 @@ void Simplex::setAdjacent(Face* face, Simplex * simplex)
 Simplex* Simplex::getAdjacent(Face* face)
 {
     auto search = m_adjacent.find(face);
+    
+    assert(search != m_adjacent.end());
+    
     if(search != m_adjacent.end()) {
         return search->second;
-    } else {
-        return NULL;
     }
+//    else {
+//        return NULL;
+//    }
+    
+    return NULL;
 }
 
 bool Simplex::hasFace(Face *face)
