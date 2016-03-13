@@ -30,8 +30,10 @@ int main()
     //DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data.txt");
     //DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data_2_10000.txt");
     //DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data_3_10000.txt");
-    //DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data_4_10000.txt");
-    DataParser dp("/Users/user/testdata/data_10_50.txt");
+    //DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data_4_100.txt");
+    //DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data_4_1000.txt");
+    DataParser dp("/Users/user/Git/delaunay-voronoi/DelaunayVoronoi/data_4_10000.txt");
+    //DataParser dp("/Users/user/testdata/data_10_50.txt");
     dimension = dp.getDimension();
     //printf("@dimension:%d\n\r", dimension);
     
